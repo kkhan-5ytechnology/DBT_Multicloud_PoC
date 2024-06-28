@@ -20,7 +20,7 @@
 
 {% macro databricks__check_table_exists(tablename) %}
     {% set sql_statement %}
-        select '[FOUND]' from INFORMATION_SCHEMA.TABLES where TABLE_NAME = '{{ tablename }}'
+        select '[FOUND]' from INFORMATION_SCHEMA.TABLES where TABLE_NAME = lower('{{ tablename }}')
     {% endset %}
     {% set result = dbt_utils.get_single_value(sql_statement, default="[NOT FOUND]") %}
 	{{ return(result) }}
