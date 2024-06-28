@@ -1,0 +1,21 @@
+version: 2
+
+seeds:
+  - name: SystemDefinitions
+    config:
+      column_types:
+        SystemId: varchar(8000)
+        Description: varchar(8000)
+  - name: SourceDatasetDefinitions
+    config:
+      column_types:
+        TargetModel: varchar(8000)
+        SourceDataset: varchar(8000)
+        WhereClause: varchar(8000)
+  - name: FieldMappingDefinitions
+    config:
+      column_types:
+        TargetModel: varchar(8000)
+        Sequence: int
+        TargetField: varchar(8000)
+        MappingExpression: varchar(8000)

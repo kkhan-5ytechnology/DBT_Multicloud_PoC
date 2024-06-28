@@ -1,0 +1,61 @@
+
+# Name your project! Project names should contain only lowercase characters
+# and underscores. A good package name should reflect your organization's
+# name or the intended use of these models
+name: 'Databricks_PoC'
+version: '1.0.0'
+
+# This setting configures which "profile" dbt uses for this project.
+profile: 'Databricks_PoC'
+#profile: 'Fabric_PoC_5Y'
+
+# These configurations specify where dbt should look for different types of files.
+# The `model-paths` config, for example, states that models in this project can be
+# found in the "models/" directory. You probably won't need to change these!
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:         # directories to be removed by `dbt clean`
+  - "target"
+  - "dbt_packages"
+
+flags:
+  partial_parse: true
+
+seeds:
+  schema: REF
+  on-run-start: ["DROP TABLE IF EXISTS REF.SystemDefinitions","DROP TABLE IF EXISTS REF.SourceDatasetDefinitions","DROP TABLE IF EXISTS REF.FieldMappingDefinitions"]
+
+# Configuring models
+# Full documentation: https://docs.getdbt.com/docs/configuring-models
+
+# In this example config, we tell dbt to build all models in the example/
+# directory as views. These settings can be overridden in the individual model
+# files using the `{{ config(...) }}` macro.
+models:
+  Databricks_PoC:
+    # Config indicated by + and applies to all files under models/example/
+    reference:
+      +materialized: ephemeral
+    stage1:
+      +materialized: view
+      +schema: STG
+    stage2:
+      +materialized: incremental
+      +schema: RAW
+      +post-hook:
+        - "{{incremental_tmp_table_dropper(this)}}"
+    stage3:
+      +materialized: view
+      +schema: INFO
+
+snapshots:
+    +target_schema: RAW
+    +unique_key: HashKey
+    +strategy: check
+    +check_cols: ['HashDiff']
+    +invalidate_hard_deletes: True

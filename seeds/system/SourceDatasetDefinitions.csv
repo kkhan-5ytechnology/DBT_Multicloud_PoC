@@ -1,0 +1,3 @@
+﻿TargetModel,SourceDataset,WhereClause
+SRC_Orders_SYS001,dbt_poc2.default.orders,1 = 1
+SRC_Customers_SYS001,dbt_poc2.default.customers,1 = 1
