@@ -1,6 +1,6 @@
 {%- macro sql_for_stage2_snapshots() -%}
 {{ config(
-    post_hook= ["{{ snapshot_version() }}","{{ snapshot_inserted() }}"]
+    post_hook= ["{{ snapshot_version() }}","{{ snapshot_inserted() }}","{{ snapshot_updated() }}","{{ snapshot_deleted() }}"]
 ) }}
 {%- set src = this.name | replace("SAT_", "SRC_") -%}
 
