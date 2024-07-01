@@ -1,1 +1,0 @@
-{{ sql_for_stage1_models() }}
