@@ -25,11 +25,13 @@ HUB_Customers,1,HashKey,HashKey
 HUB_Customers,2,SystemCode,SystemCode
 HUB_Customers,3,CompanyCode,CompanyCode
 HUB_Customers,4,CustomerID,CustomerID
+HUB_Customers,5,VaultEffectiveFrom,VaultEffectiveFrom
 HUB_Orders,1,HashKey,HashKey
 HUB_Orders,2,SystemCode,SystemCode
 HUB_Orders,3,CompanyCode,CompanyCode
 HUB_Orders,4,OrderID,OrderID
 HUB_Orders,5,CustomerID,CustomerID
+HUB_Orders,6,VaultEffectiveFrom,VaultEffectiveFrom
 SAT_Customers_SYS001,1,HashKey,src.HashKey
 SAT_Customers_SYS001,2,SystemCode,src.SystemCode
 SAT_Customers_SYS001,3,CompanyCode,src.CompanyCode
