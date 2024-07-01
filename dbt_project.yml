@@ -28,7 +28,7 @@ flags:
 
 seeds:
   schema: REF
-  on-run-start: ["DROP TABLE IF EXISTS REF.SystemDefinitions","DROP TABLE IF EXISTS REF.SourceDatasetDefinitions","DROP TABLE IF EXISTS REF.FieldMappingDefinitions"]
+  on-run-start: ["DROP TABLE IF EXISTS REF.SystemDefinitions","DROP TABLE IF EXISTS REF.VaultEntityDefinitions","DROP TABLE IF EXISTS REF.SourceDatasetDefinitions","DROP TABLE IF EXISTS REF.FieldMappingDefinitions"]
 
 vars:
   vault_active: True

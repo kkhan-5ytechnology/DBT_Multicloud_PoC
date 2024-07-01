@@ -1,36 +1,36 @@
-{% macro check_table_exists(tablename) -%}
-    {{ return(adapter.dispatch('check_table_exists')(tablename)) }}
+{% macro check_view_exists(viewname) -%}
+    {{ return(adapter.dispatch('check_view_exists')(viewname)) }}
 {%- endmacro %}
 
-{% macro default__check_table_exists(tablename) %}
+{% macro default__check_view_exists(viewname) %}
     {% set sql_statement %}
         select 
                 '[FOUND]' 
-            from sys.tables 
-            where [name] = '{{ tablename }}'
+            from sys.views 
+            where [name] = '{{ viewname }}'
     {% endset %}
     {% set result = dbt_utils.get_single_value(sql_statement, default="[NOT FOUND]") %}
 	{{ return(result) }}
 {% endmacro %}
 
-{% macro fabric__check_table_exists(tablename) %}
+{% macro fabric__check_view_exists(viewname) %}
     {% set sql_statement %}
         select 
                 '[FOUND]' 
-            from sys.tables 
-            where [name] = '{{ tablename }}'
+            from sys.views 
+            where [name] = '{{ viewname }}'
     {% endset %}
     {% set result = dbt_utils.get_single_value(sql_statement, default="[NOT FOUND]") %}
 	{{ return(result) }}
 {% endmacro %}
 
-{% macro databricks__check_table_exists(tablename) %}
+{% macro databricks__check_view_exists(viewname) %}
     {% set sql_statement %}
         select 
                 '[FOUND]' 
             from INFORMATION_SCHEMA.TABLES 
-            where TABLE_NAME = lower('{{ tablename }}')
-                and TABLE_TYPE = 'MANAGED'
+            where TABLE_NAME = lower('{{ viewname }}')
+                and TABLE_TYPE = 'VIEW'
     {% endset %}
     {% set result = dbt_utils.get_single_value(sql_statement, default="[NOT FOUND]") %}
 	{{ return(result) }}

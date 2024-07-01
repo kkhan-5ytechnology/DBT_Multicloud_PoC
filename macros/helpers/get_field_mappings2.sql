@@ -1,8 +1,8 @@
-{% macro get_field_mappings_unsafe(tablename) -%}
-    {{ return(adapter.dispatch('get_field_mappings_unsafe')(tablename)) }}
+{% macro get_field_mappings2(tablename) -%}
+    {{ return(adapter.dispatch('get_field_mappings2')(tablename)) }}
 {%- endmacro %}
 
-{%- macro default__get_field_mappings_unsafe(tablename) -%}
+{%- macro default__get_field_mappings2(tablename) -%}
     {%- set sql_statement = "select ('(' + MappingExpression + ') as ' + TargetField) as CreateColumn from REF.FieldMappingDefinitions where TargetModel = '" + tablename + "' order by Sequence" -%}
     {%- set results = run_query(sql_statement) -%}
     {%- if execute -%}
@@ -19,7 +19,7 @@
     {%- endfor %}
 {%- endmacro %}
 
-{%- macro fabric__get_field_mappings_unsafe(tablename) -%}
+{%- macro fabric__get_field_mappings2(tablename) -%}
     {%- set sql_statement = "select ('(' + MappingExpression + ') as ' + TargetField) as CreateColumn from REF.FieldMappingDefinitions where TargetModel = '" + tablename + "' order by Sequence" -%}
     {%- set results = run_query(sql_statement) -%}
     {%- if execute -%}
@@ -36,7 +36,7 @@
     {%- endfor %}
 {%- endmacro %}
 
-{%- macro databricks__get_field_mappings_unsafe(tablename) -%}
+{%- macro databricks__get_field_mappings2(tablename) -%}
     {%- set sql_statement = "select ('(' || MappingExpression || ') as ' || TargetField) as CreateColumn from REF.FieldMappingDefinitions where TargetModel = '" + tablename + "' order by Sequence" -%}
     {%- set results = run_query(sql_statement) -%}
     {%- if execute -%}
@@ -46,9 +46,9 @@
     {%- endif -%}
     {%- for result in results_list -%}
         {%- if not loop.first %}
-            ,{{ result }}
+                        ,{{ result }}
         {%- else %}
-             {{ result }}
+                         {{ result }}
         {%- endif -%}
     {%- endfor %}
 {%- endmacro %}

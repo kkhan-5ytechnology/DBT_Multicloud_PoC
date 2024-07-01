@@ -6,10 +6,15 @@ seeds:
       column_types:
         SystemId: varchar(8000)
         Description: varchar(8000)
+  - name: VaultEntityDefinitions
+    config:
+      column_types:
+        EntityId: varchar(8000)
   - name: SourceDatasetDefinitions
     config:
       column_types:
         TargetModel: varchar(8000)
+        Thread: int
         SourceDataset: varchar(8000)
         WhereClause: varchar(8000)
   - name: FieldMappingDefinitions
