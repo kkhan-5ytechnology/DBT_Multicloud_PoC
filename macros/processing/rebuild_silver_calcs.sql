@@ -35,7 +35,7 @@
                 as
                 select 
                         {{ get_field_mappings2(target) }}
-                        ,cast('{{ stopwatch_start }}' as timestamp) as VaultCallculated
+                        ,cast('{{ stopwatch_start }}' as timestamp) as VaultCalculated
 
                     from raw.{{ source }}
 

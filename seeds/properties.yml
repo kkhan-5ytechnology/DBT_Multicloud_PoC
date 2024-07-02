@@ -12,6 +12,7 @@ seeds:
         EntityId: varchar(8000)
         LinkApplicable: int
         Calculations: int
+        DimOrFact: varchar(8000)
   - name: SourceDatasetDefinitions
     config:
       column_types:

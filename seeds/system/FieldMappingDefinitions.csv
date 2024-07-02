@@ -20,7 +20,8 @@ FACT_Orders,11,DeliveryInstructions,DeliveryInstructions
 FACT_Orders,12,InternalComments,InternalComments
 FACT_Orders,13,PickingCompletedWhen,PickingCompletedWhen
 FACT_Orders,14,LastEditedBy,LastEditedBy
-CSAT_Customers_SYS001,1,AgeInDays,"(DATEDIFF(GETDATE(), AccountOpenedDate))"
+CSAT_Customers_SYS001,1,HashKey, HashKey
+CSAT_Customers_SYS001,2,AgeInDays,"(DATEDIFF(GETDATE(), AccountOpenedDate))"
 HUB_Customers,1,HashKey,HashKey
 HUB_Customers,2,SystemCode,SystemCode
 HUB_Customers,3,CompanyCode,CompanyCode
