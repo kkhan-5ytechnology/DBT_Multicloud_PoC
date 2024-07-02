@@ -17,7 +17,7 @@
             CREATE VIEW STG.{{ result.values()[0] }}
             AS
             SELECT 
-                    {{ get_field_mappings1(result.values()[0]) }}
+                    {{ get_field_mappings2(result.values()[0]) }}
                     
                 FROM {{ get_source_dataset_definition(result.values()[0]) }}
                 WHERE {{ get_source_dataset_filter(result.values()[0]) }}
@@ -43,7 +43,7 @@
             CREATE VIEW STG.{{ result.values()[0] }}
             AS
             SELECT 
-                    {{ get_field_mappings1(result.values()[0]) }}
+                    {{ get_field_mappings2(result.values()[0]) }}
                     
                 FROM {{ get_source_dataset_definition(result.values()[0]) }}
                 WHERE {{ get_source_dataset_filter(result.values()[0]) }}
@@ -63,7 +63,7 @@
             create or replace view stg.{{ result.values()[0] }}
             as
             select 
-                    {{ get_field_mappings1(result.values()[0]) }}
+                    {{ get_field_mappings2(result.values()[0]) }}
                     
                 from {{ get_source_dataset_definition(result.values()[0]) }}
                 where {{ get_source_dataset_filter(result.values()[0]) }}
