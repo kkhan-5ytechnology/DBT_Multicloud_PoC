@@ -10,6 +10,7 @@ seeds:
     config:
       column_types:
         EntityId: varchar(8000)
+        LinkApplicable: int
   - name: SourceDatasetDefinitions
     config:
       column_types:

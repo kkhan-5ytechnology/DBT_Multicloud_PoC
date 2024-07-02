@@ -1,26 +1,26 @@
-{% macro rebuild_silver_hubs() -%}
-    {{ return(adapter.dispatch('rebuild_silver_hubs')()) }}
+{% macro rebuild_silver_links() -%}
+    {{ return(adapter.dispatch('rebuild_silver_links')()) }}
 {%- endmacro %}
 
-{% macro default__rebuild_silver_hubs() %}
-
-{%- endmacro %}
-
-{% macro fabric__rebuild_silver_hubs() %}
+{% macro default__rebuild_silver_links() %}
 
 {%- endmacro %}
 
-{% macro databricks__rebuild_silver_hubs() %}
+{% macro fabric__rebuild_silver_links() %}
+
+{%- endmacro %}
+
+{% macro databricks__rebuild_silver_links() %}
     {# -- PROCESS ALL ENTITIES -- #}
     {%- set sql_statement -%}
-        select EntityId from ref.vaultentitydefinitions 
+        select EntityId from ref.vaultentitydefinitions where LinkApplicable = 1
     {%- endset -%}
     {%- set results1 = run_query(sql_statement) -%}
     {%- for result1 in results1 -%}
         {%- set entityid = result1.values()[0] -%}
-        {%- set target = "HUB_" ~ entityid -%}
+        {%- set target = "LINK_" ~ entityid -%}
 
-        {# -- NEED ONE HUB PER ENTITY SET -- #}
+        {# -- NEED ONE LINK PER ENTITY SET -- #}
         {%- set sql_view = namespace(ddl="") -%}
         {%- set sql_statement -%}
             select SystemId from ref.systemdefinitions 
@@ -30,7 +30,7 @@
             {%- set systemid = result2.values()[0] -%}
             {%- set source = "SAT_" ~ entityid ~ "_" ~ systemid -%}
 
-            {# -- GET LATEST HUB INFORMATION -- #}
+            {# -- GET LATEST LINK INFORMATION -- #}
             {%- if loop.first %}
                 {%- set tmp1 -%}
                 create or replace view raw.{{ target }}
@@ -38,7 +38,7 @@
                 select 
                         {{ get_field_mappings2(target) }}
 
-                    from raw.{{ source }}_ActiveOnly 
+                    from raw.{{ source }}_ActiveOnly  
                     
                 {%- endset -%}
                 {%- set sql_view.ddl = sql_view.ddl ~ tmp1 -%}
@@ -49,7 +49,7 @@
                 select 
                         {{ get_field_mappings2(target) }}
 
-                    from raw.{{ source }}_ActiveOnly 
+                    from raw.{{ source }}_ActiveOnly  
                     
                 {%- endset -%}
                 {%- set sql_view.ddl = sql_view.ddl ~ tmp1 -%}

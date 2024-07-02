@@ -1,5 +1,4 @@
 ﻿TargetModel,Sequence,TargetField,MappingExpression
-CSAT_Customers_SYS001,1,AgeInDays,"DATEDIFF(d, AccountOpenedDate, GETDATE())"
 DIM_Customers,1,Customer_HK,HashKey
 DIM_Customers,2,CompanyCode,CompanyCode
 DIM_Customers,3,CustomerID,CustomerID
@@ -21,17 +20,25 @@ FACT_Orders,11,DeliveryInstructions,DeliveryInstructions
 FACT_Orders,12,InternalComments,InternalComments
 FACT_Orders,13,PickingCompletedWhen,PickingCompletedWhen
 FACT_Orders,14,LastEditedBy,LastEditedBy
+CSAT_Customers_SYS001,1,AgeInDays,"DATEDIFF(d, AccountOpenedDate, GETDATE())"
 HUB_Customers,1,HashKey,HashKey
 HUB_Customers,2,SystemCode,SystemCode
 HUB_Customers,3,CompanyCode,CompanyCode
 HUB_Customers,4,CustomerID,CustomerID
-HUB_Customers,5,VaultEffectiveFrom,VaultEffectiveFrom
+HUB_Customers,90,VaultEffectiveFrom,VaultEffectiveFrom
+HUB_Customers,91,VaultVersion,VaultVersion
 HUB_Orders,1,HashKey,HashKey
 HUB_Orders,2,SystemCode,SystemCode
 HUB_Orders,3,CompanyCode,CompanyCode
 HUB_Orders,4,OrderID,OrderID
 HUB_Orders,5,CustomerID,CustomerID
-HUB_Orders,6,VaultEffectiveFrom,VaultEffectiveFrom
+HUB_Orders,90,VaultEffectiveFrom,VaultEffectiveFrom
+HUB_Orders,91,VaultVersion,VaultVersion
+LINK_Orders,1,HashKey,HashKey
+LINK_ORDERS,2,SystemCode,SystemCode
+LINK_Orders,3,Customer_HashKey,Customer_HashKey
+LINK_Orders,90,VaultEffectiveFrom,VaultEffectiveFrom
+LINK_Orders,91,VaultVersion,VaultVersion
 SAT_Customers_SYS001,1,HashKey,src.HashKey
 SAT_Customers_SYS001,2,SystemCode,src.SystemCode
 SAT_Customers_SYS001,3,CompanyCode,src.CompanyCode
