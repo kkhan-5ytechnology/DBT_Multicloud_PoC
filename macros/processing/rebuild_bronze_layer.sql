@@ -55,7 +55,7 @@
 {% endmacro %}
 
 {% macro databricks__rebuild_bronze_layer() %}
-    {%- set sql_statement = "select TargetModel from ref.sourcedatasetdefinitions" -%}
+    {%- set sql_statement = "select TargetModel from ref.SourceDatasetDefinitions" -%}
     {%- set results = run_query(sql_statement) -%}
     
     {%- for result in results -%}

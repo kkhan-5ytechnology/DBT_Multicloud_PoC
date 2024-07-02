@@ -13,7 +13,7 @@
 {% macro databricks__rebuild_silver_hubs() %}
     {# -- PROCESS ALL ENTITIES -- #}
     {%- set sql_statement -%}
-        select EntityId from ref.vaultentitydefinitions 
+        select EntityId from ref.VaultEntityDefinitions 
     {%- endset -%}
     {%- set results1 = run_query(sql_statement) -%}
     {%- for result1 in results1 -%}
@@ -23,7 +23,7 @@
         {# -- NEED ONE HUB PER ENTITY SET -- #}
         {%- set sql_view = namespace(ddl="") -%}
         {%- set sql_statement -%}
-            select SystemId from ref.systemdefinitions 
+            select SystemId from ref.SystemDefinitions 
         {%- endset -%}
         {%- set results2 = run_query(sql_statement) -%}
         {%- for result2 in results2 -%}

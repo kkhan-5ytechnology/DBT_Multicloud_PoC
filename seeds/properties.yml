@@ -11,6 +11,7 @@ seeds:
       column_types:
         EntityId: varchar(8000)
         LinkApplicable: int
+        Calculations: int
   - name: SourceDatasetDefinitions
     config:
       column_types:

@@ -13,7 +13,7 @@
 {% macro databricks__rebuild_silver_links() %}
     {# -- PROCESS ALL ENTITIES -- #}
     {%- set sql_statement -%}
-        select EntityId from ref.vaultentitydefinitions where LinkApplicable = 1
+        select EntityId from ref.VaultEntityDefinitions where LinkApplicable = 1
     {%- endset -%}
     {%- set results1 = run_query(sql_statement) -%}
     {%- for result1 in results1 -%}
@@ -23,7 +23,7 @@
         {# -- NEED ONE LINK PER ENTITY SET -- #}
         {%- set sql_view = namespace(ddl="") -%}
         {%- set sql_statement -%}
-            select SystemId from ref.systemdefinitions 
+            select SystemId from ref.SystemDefinitions 
         {%- endset -%}
         {%- set results2 = run_query(sql_statement) -%}
         {%- for result2 in results2 -%}

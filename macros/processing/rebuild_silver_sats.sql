@@ -13,7 +13,7 @@
 {% macro databricks__rebuild_silver_sats(thread) %}
     {# -- NEED ONE SAT PER SOURCE -- #}
     {%- set sql_statement -%}
-        select TargetModel from ref.sourcedatasetdefinitions where Thread = {{ thread }}
+        select TargetModel from ref.SourceDatasetDefinitions where Thread = {{ thread }}
     {%- endset -%}
     {%- set results = run_query(sql_statement) -%}
     {%- set stopwatch_start = run_started_at.strftime('%Y-%m-%d %H:%M:%S') -%}

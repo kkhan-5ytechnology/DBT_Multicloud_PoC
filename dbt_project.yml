@@ -54,4 +54,4 @@ models:
       +materialized: ephemeral
       +schema: INFO
 
-on-run-end: ["{{ rebuild_silver_hubs() }}","{{ rebuild_silver_links() }}"]
+on-run-end: ["{{ rebuild_silver_hubs() }}","{{ rebuild_silver_links() }}","{{ rebuild_silver_calcs() }}"]
