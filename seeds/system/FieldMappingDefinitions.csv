@@ -21,7 +21,7 @@ FACT_Orders,12,InternalComments,sat.InternalComments
 FACT_Orders,13,PickingCompletedWhen,sat.PickingCompletedWhen
 FACT_Orders,14,LastEditedBy,sat.LastEditedBy
 CSAT_Customers_SYS001,1,HashKey, HashKey
-CSAT_Customers_SYS001,2,AgeInDays,"(DATEDIFF(GETDATE(), AccountOpenedDate))"
+CSAT_Customers_SYS001,2,AgeInDays,"DATEDIFF(d, [AccountOpenedDate], GETDATE())"
 HUB_Customers,1,HashKey,HashKey
 HUB_Customers,2,SystemCode,SystemCode
 HUB_Customers,3,CompanyCode,CompanyCode
@@ -44,7 +44,7 @@ SAT_Customers_SYS001,1,HashKey,src.HashKey
 SAT_Customers_SYS001,2,SystemCode,src.SystemCode
 SAT_Customers_SYS001,3,CompanyCode,src.CompanyCode
 SAT_Customers_SYS001,4,CustomerID,src.CustomerID
-SAT_Customers_SYS001,5,CustomerName,"src.CustomerName || ' X'"
+SAT_Customers_SYS001,5,CustomerName,src.CustomerName
 SAT_Customers_SYS001,6,CreditLimit,src.CreditLimit
 SAT_Customers_SYS001,7,AccountOpenedDate,src.AccountOpenedDate
 SAT_Customers_SYS001,8,StandardDiscountPercentage,src.StandardDiscountPercentage
@@ -76,8 +76,8 @@ SAT_Orders_SYS001,13,PickingCompletedWhen,src.PickingCompletedWhen
 SAT_Orders_SYS001,14,LastEditedBy,src.LastEditedBy
 SAT_Orders_SYS001,15,HashDiff,src.HashDiff
 SAT_Orders_SYS001,90,Customer_HashKey,src.Customer_HashKey
-SRC_Customers_SYS001,1,HashKey,md5('Databricks' || 'WorldWideImporters' || CustomerID)
-SRC_Customers_SYS001,2,SystemCode,'Databricks'
+SRC_Customers_SYS001,1,HashKey,"CONVERT(VARCHAR(32),HashBytes('MD5', CONCAT('Fabric','WorldWideImporters',[CustomerID])),2)"
+SRC_Customers_SYS001,2,SystemCode,'Fabric'
 SRC_Customers_SYS001,3,CompanyCode,'WorldWideImporters'
 SRC_Customers_SYS001,4,CustomerID,CustomerID
 SRC_Customers_SYS001,5,CustomerName,CustomerName
@@ -94,10 +94,10 @@ SRC_Customers_SYS001,15,DeliveryPostalCode,DeliveryPostalCode
 SRC_Customers_SYS001,16,PostalAddressLine1,PostalAddressLine1
 SRC_Customers_SYS001,17,PostalAddressLine2,PostalAddressLine2
 SRC_Customers_SYS001,18,PostalPostalCode,PostalPostalCode
-SRC_Customers_SYS001,19,HashDiff,"md5(coalesce(CustomerName,'') || coalesce(CreditLimit,0) || coalesce(AccountOpenedDate,'') || coalesce(StandardDiscountPercentage,0) || coalesce(PaymentDays,0) || coalesce(PhoneNumber,'') || coalesce(FaxNumber,'') || coalesce(WebsiteURL,'') || coalesce(DeliveryAddressLine1,'') || coalesce(DeliveryAddressLine2,'') || coalesce(DeliveryPostalCode,'') || coalesce(PostalAddressLine1,'') || coalesce(PostalAddressLine2,'') || coalesce(PostalPostalCode,''))"
-SRC_Orders_SYS001,1,HashKey,md5('Databricks' || 'WorldWideImporters' || OrderID)
-SRC_Orders_SYS001,2,Customer_HashKey,md5('Databricks' || 'WorldWideImporters' || CustomerID)
-SRC_Orders_SYS001,3,SystemCode,'Databricks'
+SRC_Customers_SYS001,19,HashDiff,"CONVERT(VARCHAR(32),HashBytes('MD5', CONCAT([CustomerName],[CreditLimit],[AccountOpenedDate],[StandardDiscountPercentage],[PaymentDays],[PhoneNumber],[FaxNumber],[WebsiteURL],[DeliveryAddressLine1],[DeliveryAddressLine2],[DeliveryPostalCode],[PostalAddressLine1],[PostalAddressLine2],[PostalPostalCode])),2)"
+SRC_Orders_SYS001,1,HashKey,"CONVERT(VARCHAR(32),HashBytes('MD5', CONCAT('Fabric','WorldWideImporters',[OrderID])),2)"
+SRC_Orders_SYS001,2,Customer_HashKey,"CONVERT(VARCHAR(32),HashBytes('MD5', CONCAT('Fabric','WorldWideImporters',[CustomerID])),2)"
+SRC_Orders_SYS001,3,SystemCode,'Fabric'
 SRC_Orders_SYS001,4,CompanyCode,'WorldWideImporters'
 SRC_Orders_SYS001,5,OrderID,OrderID
 SRC_Orders_SYS001,6,CustomerID,CustomerID
@@ -110,4 +110,4 @@ SRC_Orders_SYS001,12,DeliveryInstructions,DeliveryInstructions
 SRC_Orders_SYS001,13,InternalComments,InternalComments
 SRC_Orders_SYS001,14,PickingCompletedWhen,PickingCompletedWhen
 SRC_Orders_SYS001,15,LastEditedBy,LastEditedWhen
-SRC_Orders_SYS001,16,HashDiff,"md5(coalesce(OrderDate,'') || coalesce(ExpectedDeliveryDate,'') || coalesce(CustomerPurchaseOrderNumber,'') || coalesce(IsUndersupplyBackordered,'') || coalesce(Comments,'') || coalesce(DeliveryInstructions,'') || coalesce(InternalComments,'') || coalesce(PickingCompletedWhen,'') || coalesce(LastEditedBy,'') || coalesce(LastEditedWhen,''))"
+SRC_Orders_SYS001,16,HashDiff,"CONVERT(VARCHAR(32),HashBytes('MD5', CONCAT([OrderDate],[ExpectedDeliveryDate],[CustomerPurchaseOrderNumber],[IsUndersupplyBackordered],[Comments],[DeliveryInstructions],[InternalComments],[PickingCompletedWhen],[LastEditedBy],[LastEditedWhen])),2)"

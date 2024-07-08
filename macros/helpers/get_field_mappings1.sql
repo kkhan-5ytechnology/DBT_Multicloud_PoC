@@ -3,7 +3,7 @@
 {%- endmacro %}
 
 {%- macro default__get_field_mappings1(tablename) -%}
-    {%- set sql_statement = "select ('(' + MappingExpression + ') as ' + TargetField) as CreateColumn from REF.FieldMappingDefinitions where TargetModel = '" + tablename + "' order by Sequence" -%}
+    {%- set sql_statement = "SELECT ('(' + MappingExpression + ') AS ' + TargetField) AS CreateColumn FROM REF.FieldMappingDefinitions WHERE TargetModel = '" + tablename + "' ORDER BY Sequence" -%}
     {%- set results = run_query(sql_statement) -%}
     {%- if execute -%}
         {%- set results_list = results.columns[0].values() -%}
@@ -20,7 +20,7 @@
 {%- endmacro %}
 
 {%- macro fabric__get_field_mappings1(tablename) -%}
-    {%- set sql_statement = "select ('(' + MappingExpression + ') as ' + TargetField) as CreateColumn from REF.FieldMappingDefinitions where TargetModel = '" + tablename + "' order by Sequence" -%}
+    {%- set sql_statement = "SELECT ('(' + MappingExpression + ') AS ' + TargetField) AS CreateColumn FROM REF.FieldMappingDefinitions WHERE TargetModel = '" + tablename + "' ORDER BY Sequence" -%}
     {%- set results = run_query(sql_statement) -%}
     {%- if execute -%}
         {%- set results_list = results.columns[0].values() -%}

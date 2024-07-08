@@ -4,10 +4,10 @@
 
 {% macro default__check_view_exists(viewname) %}
     {% set sql_statement %}
-        select 
+        SELECT 
                 '[FOUND]' 
-            from sys.views 
-            where [name] = '{{ viewname }}'
+            FROM sys.views 
+            WHERE [name] = '{{ viewname }}'
     {% endset %}
     {% set result = dbt_utils.get_single_value(sql_statement, default="[NOT FOUND]") %}
 	{{ return(result) }}
@@ -15,10 +15,10 @@
 
 {% macro fabric__check_view_exists(viewname) %}
     {% set sql_statement %}
-        select 
+        SELECT 
                 '[FOUND]' 
-            from sys.views 
-            where [name] = '{{ viewname }}'
+            FROM sys.views 
+            WHERE [name] = '{{ viewname }}'
     {% endset %}
     {% set result = dbt_utils.get_single_value(sql_statement, default="[NOT FOUND]") %}
 	{{ return(result) }}

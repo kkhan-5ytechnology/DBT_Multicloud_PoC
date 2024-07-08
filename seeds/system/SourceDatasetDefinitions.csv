@@ -1,3 +1,3 @@
 ﻿TargetModel,Thread,SourceDataset,WhereClause
-SRC_Orders_SYS001,1,dbt_poc2.default.orders,1 = 1
-SRC_Customers_SYS001,2,dbt_poc2.default.customers,1 = 1
+SRC_Orders_SYS001,1,WorldWideImporters.Sales.Orders,1 = 1
+SRC_Customers_SYS001,2,WorldWideImporters.Sales.Customers,1 = 1
