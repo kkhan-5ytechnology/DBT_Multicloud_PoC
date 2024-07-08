@@ -20,7 +20,7 @@ FACT_Orders,11,DeliveryInstructions,sat.DeliveryInstructions
 FACT_Orders,12,InternalComments,sat.InternalComments
 FACT_Orders,13,PickingCompletedWhen,sat.PickingCompletedWhen
 FACT_Orders,14,LastEditedBy,sat.LastEditedBy
-CSAT_Customers_SYS001,1,HashKey, HashKey
+CSAT_Customers_SYS001,1,HashKey,HashKey
 CSAT_Customers_SYS001,2,AgeInDays,"DATEDIFF(d, [AccountOpenedDate], GETDATE())"
 HUB_Customers,1,HashKey,HashKey
 HUB_Customers,2,SystemCode,SystemCode
