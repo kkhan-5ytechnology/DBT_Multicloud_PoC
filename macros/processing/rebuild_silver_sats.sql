@@ -100,7 +100,7 @@
 
                 {%- set sql_statement -%}
                     if OBJECT_ID('RAW.{{ target }}_ActiveOnly', 'V') IS NOT NULL
-                        DROP VIEW RAW.{{ target }}
+                        DROP VIEW RAW.{{ target }}_ActiveOnly
                 {%- endset -%}
                 {{ print("Attempting operation ----->\n" ~ sql_statement) }}
                 {% do run_query(sql_statement) %}
@@ -277,7 +277,7 @@
 
                 {%- set sql_statement -%}
                     if OBJECT_ID('RAW.{{ target }}_ActiveOnly', 'V') IS NOT NULL
-                        DROP VIEW RAW.{{ target }}
+                        DROP VIEW RAW.{{ target }}_ActiveOnly
                 {%- endset -%}
                 {{ print("Attempting operation ----->\n" ~ sql_statement) }}
                 {% do run_query(sql_statement) %}

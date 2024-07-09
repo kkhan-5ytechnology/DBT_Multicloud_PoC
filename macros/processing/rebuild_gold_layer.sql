@@ -14,6 +14,15 @@
         {%- set dimorfact = result1.values()[1] -%}
         {%- set target = dimorfact ~ "_" ~ entityid -%}
 
+        {# -- DROP DIM OR FACT VIEW IF EXISTS -- #}
+        {%- if check_view_exists(target) == '[FOUND]' -%}
+            {%- set sql_statement -%}
+                DROP VIEW INFO.{{ target }}
+            {%- endset -%}
+            {{ print("Attempting operation ----->\n" ~ sql_statement) }}
+            {% do run_query(sql_statement) %}
+        {%- endif -%}
+
         {# -- UNION DATA FROM ALL SATS -- #}
         {%- set sql_view = namespace(ddl="") -%}
         {%- set sql_statement -%}
@@ -74,6 +83,15 @@
         {%- set dimorfact = result1.values()[1] -%}
         {%- set target = dimorfact ~ "_" ~ entityid -%}
 
+        {# -- DROP DIM OR FACT VIEW IF EXISTS -- #}
+        {%- if check_view_exists(target) == '[FOUND]' -%}
+            {%- set sql_statement -%}
+                DROP VIEW INFO.{{ target }}
+            {%- endset -%}
+            {{ print("Attempting operation ----->\n" ~ sql_statement) }}
+            {% do run_query(sql_statement) %}
+        {%- endif -%}
+        
         {# -- UNION DATA FROM ALL SATS -- #}
         {%- set sql_view = namespace(ddl="") -%}
         {%- set sql_statement -%}
@@ -84,7 +102,7 @@
             {%- set systemid = result2.values()[0] -%}
             {%- set sat = "SAT_" ~ entityid ~ "_" ~ systemid -%}
             {%- set csat = "CSAT_" ~ entityid ~ "_" ~ systemid -%}
-            
+
             {# -- GET LATEST SAT INFORMATION -- #}
             {%- if loop.first %}
                 {%- set tmp1 -%}
