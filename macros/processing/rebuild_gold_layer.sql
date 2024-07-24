@@ -5,7 +5,7 @@
 {% macro default__rebuild_gold_layer() %}
     {# -- PROCESS ALL SEMANTIC MODEL ENTITIES -- #}
     {%- set sql_statement -%}
-        SELECT EntityId, DimOrFact FROM REF.VaultEntityDefinitions WHERE DimOrFact IN ('DIM','FACT')
+        SELECT [EntityId], [DimOrFact] FROM REF.VaultEntityDefinitions WHERE [DimOrFact] IN ('DIM','FACT')
     {%- endset -%}
     {%- set results1 = run_query(sql_statement) -%}
     {%- set stopwatch_start = run_started_at.strftime('%Y-%m-%d %H:%M:%S') -%}
@@ -26,7 +26,7 @@
         {# -- UNION DATA FROM ALL SATS -- #}
         {%- set sql_view = namespace(ddl="") -%}
         {%- set sql_statement -%}
-            SELECT SystemId FROM REF.SystemDefinitions 
+            SELECT [SystemId] FROM REF.SystemDefinitions 
         {%- endset -%}
         {%- set results2 = run_query(sql_statement) -%}
         {%- for result2 in results2 -%}
@@ -44,7 +44,7 @@
 
                     FROM RAW.{{ sat }}_ActiveOnly AS sat
                     {% if check_table_exists(csat) == '[FOUND]' %}
-                        LEFT JOIN RAW.{{ csat }} AS csat ON sat.HashKey = csat.HashKey
+                        LEFT JOIN RAW.{{ csat }} AS csat ON sat.[HashKey] = csat.[HashKey]
                     {% endif %}
                 {%- endset -%}
                 {%- set sql_view.ddl = sql_view.ddl ~ tmp1 -%}
@@ -57,7 +57,7 @@
 
                     FROM RAW.{{ sat }}_ActiveOnly AS sat
                     {% if check_table_exists(csat) == '[FOUND]' %}
-                        LEFT JOIN RAW.{{ csat }} AS csat ON sat.HashKey = csat.HashKey
+                        LEFT JOIN RAW.{{ csat }} AS csat ON sat.[HashKey] = csat.[HashKey]
                     {% endif %} 
                 {%- endset -%}
                 {%- set sql_view.ddl = sql_view.ddl ~ tmp1 -%}
@@ -74,7 +74,7 @@
 {% macro fabric__rebuild_gold_layer() %}
     {# -- PROCESS ALL SEMANTIC MODEL ENTITIES -- #}
     {%- set sql_statement -%}
-        SELECT EntityId, DimOrFact FROM REF.VaultEntityDefinitions WHERE DimOrFact IN ('DIM','FACT')
+        SELECT [EntityId], [DimOrFact] FROM REF.VaultEntityDefinitions WHERE [DimOrFact] IN ('DIM','FACT')
     {%- endset -%}
     {%- set results1 = run_query(sql_statement) -%}
     {%- set stopwatch_start = run_started_at.strftime('%Y-%m-%d %H:%M:%S') -%}
@@ -95,7 +95,7 @@
         {# -- UNION DATA FROM ALL SATS -- #}
         {%- set sql_view = namespace(ddl="") -%}
         {%- set sql_statement -%}
-            SELECT SystemId FROM REF.SystemDefinitions 
+            SELECT [SystemId] FROM REF.SystemDefinitions 
         {%- endset -%}
         {%- set results2 = run_query(sql_statement) -%}
         {%- for result2 in results2 -%}
@@ -113,7 +113,7 @@
 
                     FROM RAW.{{ sat }}_ActiveOnly AS sat
                     {% if check_table_exists(csat) == '[FOUND]' %}
-                        LEFT JOIN RAW.{{ csat }} AS csat ON sat.HashKey = csat.HashKey
+                        LEFT JOIN RAW.{{ csat }} AS csat ON sat.[HashKey] = csat.[HashKey]
                     {% endif %}
                 {%- endset -%}
                 {%- set sql_view.ddl = sql_view.ddl ~ tmp1 -%}
@@ -126,7 +126,7 @@
 
                     FROM RAW.{{ sat }}_ActiveOnly AS sat
                     {% if check_table_exists(csat) == '[FOUND]' %}
-                        LEFT JOIN RAW.{{ csat }} AS csat ON sat.HashKey = csat.HashKey
+                        LEFT JOIN RAW.{{ csat }} AS csat ON sat.[HashKey] = csat.[HashKey]
                     {% endif %} 
                 {%- endset -%}
                 {%- set sql_view.ddl = sql_view.ddl ~ tmp1 -%}

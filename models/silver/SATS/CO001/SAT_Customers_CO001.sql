@@ -2,6 +2,6 @@
     tags=["silver"]
 ) }}
 
--- depends_on: {{ ref('SAT_Customers_SYS001') }}
+-- depends_on: {{ ref('SRC_Customers_CO001') }}
 
 select * from {{ this }}

@@ -1,113 +1,452 @@
 ﻿TargetModel,Sequence,TargetField,MappingExpression
-DIM_Customers,1,Customer_HK,sat.HashKey
-DIM_Customers,2,CompanyCode,sat.CompanyCode
-DIM_Customers,3,CustomerID,sat.CustomerID
-DIM_Customers,4,CustomerName,sat.CustomerName
-DIM_Customers,5,AccountOpenedDate,sat.AccountOpenedDate
-DIM_Customers,6,AgeInDays,csat.AgeInDays
-DIM_Customers,7,PostalAddressFull,sat.PostalAddressFull
-FACT_Orders,1,Order_HK,sat.HashKey
-FACT_Orders,2,Customer_HK,sat.Customer_HashKey
-FACT_Orders,3,CompanyCode,sat.CompanyCode
-FACT_Orders,4,OrderID,sat.OrderID
-FACT_Orders,5,CustomerID,sat.CustomerID
-FACT_Orders,6,OrderDate,sat.OrderDate
-FACT_Orders,7,ExpectedDeliveryDate,sat.ExpectedDeliveryDate
-FACT_Orders,8,CustomerPurchaseOrderNumber,sat.CustomerPurchaseOrderNumber
-FACT_Orders,9,IsUndersupplyBackordered,sat.IsUndersupplyBackordered
-FACT_Orders,10,Comments,sat.Comments
-FACT_Orders,11,DeliveryInstructions,sat.DeliveryInstructions
-FACT_Orders,12,InternalComments,sat.InternalComments
-FACT_Orders,13,PickingCompletedWhen,sat.PickingCompletedWhen
-FACT_Orders,14,LastEditedBy,sat.LastEditedBy
-CSAT_Customers_SYS001,1,HashKey,HashKey
-CSAT_Customers_SYS001,2,AgeInDays,"DATEDIFF(d, [AccountOpenedDate], GETDATE())"
-HUB_Customers,1,HashKey,HashKey
-HUB_Customers,2,SystemCode,SystemCode
-HUB_Customers,3,CompanyCode,CompanyCode
-HUB_Customers,4,CustomerID,CustomerID
-HUB_Customers,90,VaultEffectiveFrom,VaultEffectiveFrom
-HUB_Customers,91,VaultVersion,VaultVersion
-HUB_Orders,1,HashKey,HashKey
-HUB_Orders,2,SystemCode,SystemCode
-HUB_Orders,3,CompanyCode,CompanyCode
-HUB_Orders,4,OrderID,OrderID
-HUB_Orders,5,CustomerID,CustomerID
-HUB_Orders,90,VaultEffectiveFrom,VaultEffectiveFrom
-HUB_Orders,91,VaultVersion,VaultVersion
-LINK_Orders,1,HashKey,HashKey
-LINK_ORDERS,2,SystemCode,SystemCode
-LINK_Orders,3,Customer_HashKey,Customer_HashKey
-LINK_Orders,90,VaultEffectiveFrom,VaultEffectiveFrom
-LINK_Orders,91,VaultVersion,VaultVersion
-SAT_Customers_SYS001,1,HashKey,src.HashKey
-SAT_Customers_SYS001,2,SystemCode,src.SystemCode
-SAT_Customers_SYS001,3,CompanyCode,src.CompanyCode
-SAT_Customers_SYS001,4,CustomerID,src.CustomerID
-SAT_Customers_SYS001,5,CustomerName,src.CustomerName
-SAT_Customers_SYS001,6,CreditLimit,src.CreditLimit
-SAT_Customers_SYS001,7,AccountOpenedDate,src.AccountOpenedDate
-SAT_Customers_SYS001,8,StandardDiscountPercentage,src.StandardDiscountPercentage
-SAT_Customers_SYS001,9,PaymentDays,src.PaymentDays
-SAT_Customers_SYS001,10,PhoneNumber,src.PhoneNumber
-SAT_Customers_SYS001,11,FaxNumber,src.FaxNumber
-SAT_Customers_SYS001,12,WebsiteURL,src.WebsiteURL
-SAT_Customers_SYS001,13,DeliveryAddressLine1,src.DeliveryAddressLine1
-SAT_Customers_SYS001,14,DeliveryAddressLine2,src.DeliveryAddressLine2
-SAT_Customers_SYS001,15,DeliveryPostalCode,src.DeliveryPostalCode
-SAT_Customers_SYS001,16,PostalAddressLine1,src.PostalAddressLine1
-SAT_Customers_SYS001,17,PostalAddressLine2,src.PostalAddressLine2
-SAT_Customers_SYS001,18,PostalPostalCode,src.PostalPostalCode
-SAT_Customers_SYS001,19,PostalAddressFull,"CONCAT(src.PostalAddressLine1,',',src.PostalAddressLine2,',',src.PostalPostalCode)"
-SAT_Customers_SYS001,20,HashDiff,src.HashDiff
-SAT_Orders_SYS001,1,HashKey,src.HashKey
-SAT_Orders_SYS001,2,SystemCode,src.SystemCode
-SAT_Orders_SYS001,3,CompanyCode,src.CompanyCode
-SAT_Orders_SYS001,4,OrderID,src.OrderID
-SAT_Orders_SYS001,5,CustomerID,src.CustomerID
-SAT_Orders_SYS001,6,OrderDate,src.OrderDate
-SAT_Orders_SYS001,7,ExpectedDeliveryDate,src.ExpectedDeliveryDate
-SAT_Orders_SYS001,8,CustomerPurchaseOrderNumber,src.CustomerPurchaseOrderNumber
-SAT_Orders_SYS001,9,IsUndersupplyBackordered,src.IsUndersupplyBackordered
-SAT_Orders_SYS001,10,Comments,src.Comments
-SAT_Orders_SYS001,11,DeliveryInstructions,src.DeliveryInstructions
-SAT_Orders_SYS001,12,InternalComments,src.InternalComments
-SAT_Orders_SYS001,13,PickingCompletedWhen,src.PickingCompletedWhen
-SAT_Orders_SYS001,14,LastEditedBy,src.LastEditedBy
-SAT_Orders_SYS001,15,HashDiff,src.HashDiff
-SAT_Orders_SYS001,90,Customer_HashKey,src.Customer_HashKey
-SRC_Customers_SYS001,1,HashKey,"CONVERT(VARCHAR(32),HashBytes('MD5', CONCAT('Fabric','WorldWideImporters',[CustomerID])),2)"
-SRC_Customers_SYS001,2,SystemCode,'Fabric'
-SRC_Customers_SYS001,3,CompanyCode,'WorldWideImporters'
-SRC_Customers_SYS001,4,CustomerID,CustomerID
-SRC_Customers_SYS001,5,CustomerName,CustomerName
-SRC_Customers_SYS001,6,CreditLimit,CreditLimit
-SRC_Customers_SYS001,7,AccountOpenedDate,AccountOpenedDate
-SRC_Customers_SYS001,8,StandardDiscountPercentage,StandardDiscountPercentage
-SRC_Customers_SYS001,9,PaymentDays,PaymentDays
-SRC_Customers_SYS001,10,PhoneNumber,PhoneNumber
-SRC_Customers_SYS001,11,FaxNumber,FaxNumber
-SRC_Customers_SYS001,12,WebsiteURL,WebsiteURL
-SRC_Customers_SYS001,13,DeliveryAddressLine1,DeliveryAddressLine1
-SRC_Customers_SYS001,14,DeliveryAddressLine2,DeliveryAddressLine2
-SRC_Customers_SYS001,15,DeliveryPostalCode,DeliveryPostalCode
-SRC_Customers_SYS001,16,PostalAddressLine1,PostalAddressLine1
-SRC_Customers_SYS001,17,PostalAddressLine2,PostalAddressLine2
-SRC_Customers_SYS001,18,PostalPostalCode,PostalPostalCode
-SRC_Customers_SYS001,19,HashDiff,"CONVERT(VARCHAR(32),HashBytes('MD5', CONCAT([CustomerName],[CreditLimit],[AccountOpenedDate],[StandardDiscountPercentage],[PaymentDays],[PhoneNumber],[FaxNumber],[WebsiteURL],[DeliveryAddressLine1],[DeliveryAddressLine2],[DeliveryPostalCode],[PostalAddressLine1],[PostalAddressLine2],[PostalPostalCode])),2)"
-SRC_Orders_SYS001,1,HashKey,"CONVERT(VARCHAR(32),HashBytes('MD5', CONCAT('Fabric','WorldWideImporters',[OrderID])),2)"
-SRC_Orders_SYS001,2,Customer_HashKey,"CONVERT(VARCHAR(32),HashBytes('MD5', CONCAT('Fabric','WorldWideImporters',[CustomerID])),2)"
-SRC_Orders_SYS001,3,SystemCode,'Fabric'
-SRC_Orders_SYS001,4,CompanyCode,'WorldWideImporters'
-SRC_Orders_SYS001,5,OrderID,OrderID
-SRC_Orders_SYS001,6,CustomerID,CustomerID
-SRC_Orders_SYS001,7,OrderDate,OrderDate
-SRC_Orders_SYS001,8,ExpectedDeliveryDate,ExpectedDeliveryDate
-SRC_Orders_SYS001,9,CustomerPurchaseOrderNumber,CustomerPurchaseOrderNumber
-SRC_Orders_SYS001,10,IsUndersupplyBackordered,IsUndersupplyBackordered
-SRC_Orders_SYS001,11,Comments,Comments
-SRC_Orders_SYS001,12,DeliveryInstructions,DeliveryInstructions
-SRC_Orders_SYS001,13,InternalComments,InternalComments
-SRC_Orders_SYS001,14,PickingCompletedWhen,PickingCompletedWhen
-SRC_Orders_SYS001,15,LastEditedBy,LastEditedWhen
-SRC_Orders_SYS001,16,HashDiff,"CONVERT(VARCHAR(32),HashBytes('MD5', CONCAT([OrderDate],[ExpectedDeliveryDate],[CustomerPurchaseOrderNumber],[IsUndersupplyBackordered],[Comments],[DeliveryInstructions],[InternalComments],[PickingCompletedWhen],[LastEditedBy],[LastEditedWhen])),2)"
+DIM_Customers,1,[CustomerDimKey],sat.[CustomerDimKey]
+DIM_Customers,2,[CustomerId],sat.[CustomerId]
+DIM_Customers,3,[ABCCode],sat.[ABCCode]
+DIM_Customers,4,[CustomerAddress],sat.[CustomerAddress]
+DIM_Customers,5,[CustomerCity],sat.[CustomerCity]
+DIM_Customers,6,[CustomerClassificationGroup],sat.[CustomerClassificationGroup]
+DIM_Customers,7,[CustomerClassificationGroupCode],sat.[CustomerClassificationGroupCode]
+DIM_Customers,8,[CustomerCode],sat.[CustomerCode]
+DIM_Customers,9,[CustomerCompanyCode],sat.[CustomerCompanyCode]
+DIM_Customers,10,[CustomerCountryOrRegion],sat.[CustomerCountryOrRegion]
+DIM_Customers,11,[CustomerCreditLimit],sat.[CustomerCreditLimit]
+DIM_Customers,12,[CustomerCreditRating],sat.[CustomerCreditRating]
+DIM_Customers,13,[CustomerDeliveryTerms],sat.[CustomerDeliveryTerms]
+DIM_Customers,14,[CustomerDeliveryTermsCode],sat.[CustomerDeliveryTermsCode]
+DIM_Customers,15,[CustomerGroup],sat.[CustomerGroup]
+DIM_Customers,16,[CustomerGroupCode],sat.[CustomerGroupCode]
+DIM_Customers,17,[CustomerLineOfBusiness],sat.[CustomerLineOfBusiness]
+DIM_Customers,18,[CustomerLineOfBusinessCode],sat.[CustomerLineOfBusinessCode]
+DIM_Customers,19,[CustomerMethodOfPayment],sat.[CustomerMethodOfPayment]
+DIM_Customers,20,[CustomerMethodOfPaymentCode],sat.[CustomerMethodOfPaymentCode]
+DIM_Customers,21,[CustomerModeOfDelivery],sat.[CustomerModeOfDelivery]
+DIM_Customers,22,[CustomerModeOfDeliveryCode],sat.[CustomerModeOfDeliveryCode]
+DIM_Customers,23,[CustomerName],sat.[CustomerName]
+DIM_Customers,24,[CustomerPartyID],sat.[CustomerPartyID]
+DIM_Customers,25,[CustomerPaymentTerm],sat.[CustomerPaymentTerm]
+DIM_Customers,26,[CustomerPaymentTermsCode],sat.[CustomerPaymentTermsCode]
+DIM_Customers,27,[CustomerPostCode],sat.[CustomerPostCode]
+DIM_Customers,28,[CustomerPriceGroup],sat.[CustomerPriceGroup]
+DIM_Customers,29,[CustomerPriceGroupCode],sat.[CustomerPriceGroupCode]
+DIM_Customers,30,[CustomerSalesDistrict],sat.[CustomerSalesDistrict]
+DIM_Customers,31,[CustomerSalesDistrictCode],sat.[CustomerSalesDistrictCode]
+DIM_Customers,32,[CustomerSalesGroup],sat.[CustomerSalesGroup]
+DIM_Customers,33,[CustomerSalesGroupCode],sat.[CustomerSalesGroupCode]
+DIM_Customers,34,[CustomerSalesPool],sat.[CustomerSalesPool]
+DIM_Customers,35,[CustomerSalesPoolCode],sat.[CustomerSalesPoolCode]
+DIM_Customers,36,[CustomerSegment],sat.[CustomerSegment]
+DIM_Customers,37,[CustomerSegmentCode],sat.[CustomerSegmentCode]
+DIM_Customers,38,[CustomerState],sat.[CustomerState]
+DIM_Customers,39,[CustomerStatisticsGroup],sat.[CustomerStatisticsGroup]
+DIM_Customers,40,[CustomerStatisticsGroupCode],sat.[CustomerStatisticsGroupCode]
+DIM_Customers,41,[CustomerSubsegment],sat.[CustomerSubsegment]
+DIM_Customers,42,[CustomerSubsegmentCode],sat.[CustomerSubsegmentCode]
+DIM_Customers,43,[CustomerHashDiff],sat.[CustomerHashDiff]
+DIM_Customers,44,[LoadDate],sat.[VaultEffectiveFrom]
+DIM_Customers,45,[RecordSource],sat.[RecordSource]
+HUB_Customers,1,[CustomerDimKey],[CustomerDimKey]
+HUB_Customers,2,[RecordSource],[RecordSource]
+HUB_Customers,3,[CustomerCode],[CustomerCode]
+SAT_Customers_CO001,1,[CustomerDimKey],CAST([HashKey] AS varchar(255))
+SAT_Customers_CO001,2,[CustomerId],CAST(0 AS bigint)
+SAT_Customers_CO001,3,[ABCCode],CAST(NULL AS int)
+SAT_Customers_CO001,4,[CustomerAddress],CAST(NULL AS nvarchar(500))
+SAT_Customers_CO001,5,[CustomerCity],CAST(NULL AS nvarchar(120))
+SAT_Customers_CO001,6,[CustomerClassificationGroup],CAST(NULL AS nvarchar(120))
+SAT_Customers_CO001,7,[CustomerClassificationGroupCode],CAST(NULL AS nvarchar(20))
+SAT_Customers_CO001,8,[CustomerCode],CAST([No] AS nvarchar(40))
+SAT_Customers_CO001,9,[CustomerCompanyCode],CAST(NULL AS nvarchar(8))
+SAT_Customers_CO001,10,[CustomerCountryOrRegion],CAST(NULL AS nvarchar(20))
+SAT_Customers_CO001,11,[CustomerCreditLimit],"CAST(NULL AS numeric(32,6))"
+SAT_Customers_CO001,12,[CustomerCreditRating],CAST(NULL AS nvarchar(20))
+SAT_Customers_CO001,13,[CustomerDeliveryTerms],CAST(NULL AS nvarchar(120))
+SAT_Customers_CO001,14,[CustomerDeliveryTermsCode],CAST(NULL AS nvarchar(20))
+SAT_Customers_CO001,15,[CustomerGroup],CAST(NULL AS nvarchar(120))
+SAT_Customers_CO001,16,[CustomerGroupCode],CAST(NULL AS nvarchar(20))
+SAT_Customers_CO001,17,[CustomerLineOfBusiness],CAST(NULL AS nvarchar(120))
+SAT_Customers_CO001,18,[CustomerLineOfBusinessCode],CAST(NULL AS nvarchar(20))
+SAT_Customers_CO001,19,[CustomerMethodOfPayment],CAST(NULL AS nvarchar(120))
+SAT_Customers_CO001,20,[CustomerMethodOfPaymentCode],CAST(NULL AS nvarchar(20))
+SAT_Customers_CO001,21,[CustomerModeOfDelivery],CAST(NULL AS nvarchar(120))
+SAT_Customers_CO001,22,[CustomerModeOfDeliveryCode],CAST(NULL AS nvarchar(20))
+SAT_Customers_CO001,23,[CustomerName],CAST(NULL AS nvarchar(200))
+SAT_Customers_CO001,24,[CustomerPartyID],CAST(NULL AS bigint)
+SAT_Customers_CO001,25,[CustomerPaymentTerm],CAST(NULL AS nvarchar(120))
+SAT_Customers_CO001,26,[CustomerPaymentTermsCode],CAST(NULL AS nvarchar(200))
+SAT_Customers_CO001,27,[CustomerPostCode],CAST(NULL AS nvarchar(20))
+SAT_Customers_CO001,28,[CustomerPriceGroup],CAST(NULL AS nvarchar(120))
+SAT_Customers_CO001,29,[CustomerPriceGroupCode],CAST(NULL AS nvarchar(20))
+SAT_Customers_CO001,30,[CustomerSalesDistrict],CAST(NULL AS nvarchar(120))
+SAT_Customers_CO001,31,[CustomerSalesDistrictCode],CAST(NULL AS nvarchar(40))
+SAT_Customers_CO001,32,[CustomerSalesGroup],CAST(NULL AS nvarchar(120))
+SAT_Customers_CO001,33,[CustomerSalesGroupCode],CAST(NULL AS nvarchar(20))
+SAT_Customers_CO001,34,[CustomerSalesPool],CAST(NULL AS nvarchar(120))
+SAT_Customers_CO001,35,[CustomerSalesPoolCode],CAST(NULL AS nvarchar(20))
+SAT_Customers_CO001,36,[CustomerSegment],CAST(NULL AS nvarchar(120))
+SAT_Customers_CO001,37,[CustomerSegmentCode],CAST(NULL AS nvarchar(40))
+SAT_Customers_CO001,38,[CustomerState],CAST(NULL AS nvarchar(20))
+SAT_Customers_CO001,39,[CustomerStatisticsGroup],CAST(NULL AS nvarchar(120))
+SAT_Customers_CO001,40,[CustomerStatisticsGroupCode],CAST(NULL AS nvarchar(20))
+SAT_Customers_CO001,41,[CustomerSubsegment],CAST(NULL AS nvarchar(120))
+SAT_Customers_CO001,42,[CustomerSubsegmentCode],CAST(NULL AS nvarchar(40))
+SAT_Customers_CO001,43,[CustomerHashDiff],CAST(NULL AS varchar(max))
+SAT_Customers_CO001,44,[LoadDate],CAST(NULL AS datetime)
+SAT_Customers_CO001,45,[RecordSource],CAST([RecordSource] AS varchar(200))
+SRC_Customers_CO001,2,[No],[No]
+SRC_Customers_CO001,2,[Name],[Name]
+SRC_Customers_CO001,3,[Name_2],[Name_2]
+SRC_Customers_CO001,4,[Search_Name],[Search_Name]
+SRC_Customers_CO001,5,[IC_Partner_Code],[IC_Partner_Code]
+SRC_Customers_CO001,6,[Balance_LCY],[Balance_LCY]
+SRC_Customers_CO001,7,[BalanceAsVendor],[BalanceAsVendor]
+SRC_Customers_CO001,8,[Balance_Due_LCY],[Balance_Due_LCY]
+SRC_Customers_CO001,9,[Credit_Limit_LCY],[Credit_Limit_LCY]
+SRC_Customers_CO001,10,[Blocked],[Blocked]
+SRC_Customers_CO001,11,[Privacy_Blocked],[Privacy_Blocked]
+SRC_Customers_CO001,12,[Salesperson_Code],[Salesperson_Code]
+SRC_Customers_CO001,13,[Responsibility_Center],[Responsibility_Center]
+SRC_Customers_CO001,14,[Service_Zone_Code],[Service_Zone_Code]
+SRC_Customers_CO001,15,[Document_Sending_Profile],[Document_Sending_Profile]
+SRC_Customers_CO001,16,[TotalSales2],[TotalSales2]
+SRC_Customers_CO001,17,[CustSalesLCY_CustProfit_AdjmtCostLCY],[CustSalesLCY_CustProfit_AdjmtCostLCY]
+SRC_Customers_CO001,18,[AdjCustProfit],[AdjCustProfit]
+SRC_Customers_CO001,19,[AdjProfitPct],[AdjProfitPct]
+SRC_Customers_CO001,20,[Last_Date_Modified],[Last_Date_Modified]
+SRC_Customers_CO001,21,[Disable_Search_by_Name],[Disable_Search_by_Name]
+SRC_Customers_CO001,22,[Priority],[Priority]
+SRC_Customers_CO001,23,[LookupAddress],[LookupAddress]
+SRC_Customers_CO001,24,[Address],[Address]
+SRC_Customers_CO001,25,[Address_2],[Address_2]
+SRC_Customers_CO001,26,[Country_Region_Code],[Country_Region_Code]
+SRC_Customers_CO001,27,[City],[City]
+SRC_Customers_CO001,28,[County],[County]
+SRC_Customers_CO001,29,[Post_Code],[Post_Code]
+SRC_Customers_CO001,30,[ShowMap],[ShowMap]
+SRC_Customers_CO001,31,[Phone_No],[Phone_No]
+SRC_Customers_CO001,32,[MobilePhoneNo],[MobilePhoneNo]
+SRC_Customers_CO001,33,[E_Mail],[E_Mail]
+SRC_Customers_CO001,34,[Fax_No],[Fax_No]
+SRC_Customers_CO001,35,[Home_Page],[Home_Page]
+SRC_Customers_CO001,36,[Language_Code],[Language_Code]
+SRC_Customers_CO001,37,[Format_Region],[Format_Region]
+SRC_Customers_CO001,38,[Primary_Contact_No],[Primary_Contact_No]
+SRC_Customers_CO001,39,[ContactName],[ContactName]
+SRC_Customers_CO001,40,[Bill_to_Customer_No],[Bill_to_Customer_No]
+SRC_Customers_CO001,41,[VAT_Registration_No],[VAT_Registration_No]
+SRC_Customers_CO001,42,[EORI_Number],[EORI_Number]
+SRC_Customers_CO001,43,[GLN],[GLN]
+SRC_Customers_CO001,44,[Use_GLN_in_Electronic_Document],[Use_GLN_in_Electronic_Document]
+SRC_Customers_CO001,45,[Copy_Sell_to_Addr_to_Qte_From],[Copy_Sell_to_Addr_to_Qte_From]
+SRC_Customers_CO001,46,[Tax_Liable],[Tax_Liable]
+SRC_Customers_CO001,47,[Tax_Area_Code],[Tax_Area_Code]
+SRC_Customers_CO001,48,[Registration_Number],[Registration_Number]
+SRC_Customers_CO001,49,[Gen_Bus_Posting_Group],[Gen_Bus_Posting_Group]
+SRC_Customers_CO001,50,[VAT_Bus_Posting_Group],[VAT_Bus_Posting_Group]
+SRC_Customers_CO001,51,[Customer_Posting_Group],[Customer_Posting_Group]
+SRC_Customers_CO001,52,[Allow_Multiple_Posting_Groups],[Allow_Multiple_Posting_Groups]
+SRC_Customers_CO001,53,[Currency_Code],[Currency_Code]
+SRC_Customers_CO001,54,[Price_Calculation_Method],[Price_Calculation_Method]
+SRC_Customers_CO001,55,[Customer_Price_Group],[Customer_Price_Group]
+SRC_Customers_CO001,56,[Customer_Disc_Group],[Customer_Disc_Group]
+SRC_Customers_CO001,57,[Allow_Line_Disc],[Allow_Line_Disc]
+SRC_Customers_CO001,58,[Invoice_Disc_Code],[Invoice_Disc_Code]
+SRC_Customers_CO001,59,[Prices_Including_VAT],[Prices_Including_VAT]
+SRC_Customers_CO001,60,[Prepayment_Percent],[Prepayment_Percent]
+SRC_Customers_CO001,61,[Application_Method],[Application_Method]
+SRC_Customers_CO001,62,[Partner_Type],[Partner_Type]
+SRC_Customers_CO001,63,[Intrastat_Partner_Type],[Intrastat_Partner_Type]
+SRC_Customers_CO001,64,[Payment_Terms_Code],[Payment_Terms_Code]
+SRC_Customers_CO001,65,[Payment_Method_Code],[Payment_Method_Code]
+SRC_Customers_CO001,66,[Reminder_Terms_Code],[Reminder_Terms_Code]
+SRC_Customers_CO001,67,[Fin_Charge_Terms_Code],[Fin_Charge_Terms_Code]
+SRC_Customers_CO001,68,[Cash_Flow_Payment_Terms_Code],[Cash_Flow_Payment_Terms_Code]
+SRC_Customers_CO001,69,[Print_Statements],[Print_Statements]
+SRC_Customers_CO001,70,[Last_Statement_No],[Last_Statement_No]
+SRC_Customers_CO001,71,[Block_Payment_Tolerance],[Block_Payment_Tolerance]
+SRC_Customers_CO001,72,[Preferred_Bank_Account_Code],[Preferred_Bank_Account_Code]
+SRC_Customers_CO001,73,[Exclude_from_Pmt_Practices],[Exclude_from_Pmt_Practices]
+SRC_Customers_CO001,74,[Ship_to_Code],[Ship_to_Code]
+SRC_Customers_CO001,75,[Location_Code],[Location_Code]
+SRC_Customers_CO001,76,[Combine_Shipments],[Combine_Shipments]
+SRC_Customers_CO001,77,[Reserve],[Reserve]
+SRC_Customers_CO001,78,[Shipping_Advice],[Shipping_Advice]
+SRC_Customers_CO001,79,[Shipment_Method_Code],[Shipment_Method_Code]
+SRC_Customers_CO001,80,[Shipping_Agent_Code],[Shipping_Agent_Code]
+SRC_Customers_CO001,81,[Shipping_Agent_Service_Code],[Shipping_Agent_Service_Code]
+SRC_Customers_CO001,82,[Shipping_Time],[Shipping_Time]
+SRC_Customers_CO001,83,[Base_Calendar_Code],[Base_Calendar_Code]
+SRC_Customers_CO001,84,[Customized_Calendar],[Customized_Calendar]
+SRC_Customers_CO001,85,[Default_Trans_Type],[Default_Trans_Type]
+SRC_Customers_CO001,86,[Default_Trans_Type_Return],[Default_Trans_Type_Return]
+SRC_Customers_CO001,87,[Def_Transport_Method],[Def_Transport_Method]
+SRC_Customers_CO001,88,[Balance_LCY_2],[Balance_LCY_2]
+SRC_Customers_CO001,89,[ExpectedCustMoneyOwed],[ExpectedCustMoneyOwed]
+SRC_Customers_CO001,90,[TotalMoneyOwed],[TotalMoneyOwed]
+SRC_Customers_CO001,91,[CreditLimit],[CreditLimit]
+SRC_Customers_CO001,92,[CalcCreditLimitLCYExpendedPct],[CalcCreditLimitLCYExpendedPct]
+SRC_Customers_CO001,93,[Balance_Due],[Balance_Due]
+SRC_Customers_CO001,94,[Payments_LCY],[Payments_LCY]
+SRC_Customers_CO001,95,[CustomerMgt_AvgDaysToPay_No],[CustomerMgt_AvgDaysToPay_No]
+SRC_Customers_CO001,96,[DaysPaidPastDueDate],[DaysPaidPastDueDate]
+SRC_Customers_CO001,97,[AmountOnPostedInvoices],[AmountOnPostedInvoices]
+SRC_Customers_CO001,98,[AmountOnCrMemo],[AmountOnCrMemo]
+SRC_Customers_CO001,99,[AmountOnOutstandingInvoices],[AmountOnOutstandingInvoices]
+SRC_Customers_CO001,100,[AmountOnOutstandingCrMemos],[AmountOnOutstandingCrMemos]
+SRC_Customers_CO001,101,[Totals],[Totals]
+SRC_Customers_CO001,102,[CustInvDiscAmountLCY],[CustInvDiscAmountLCY]
+SRC_Customers_CO001,103,[Global_Dimension_1_Filter],[Global_Dimension_1_Filter]
+SRC_Customers_CO001,104,[Global_Dimension_2_Filter],[Global_Dimension_2_Filter]
+SRC_Customers_CO001,105,[Currency_Filter],[Currency_Filter]
+SRC_Customers_CO001,106,[Date_Filter],[Date_Filter]
+SRC_Customers_CO001,107,[RecordSource],'Business Central - CO001'
+SRC_Customers_CO001,108,[HashKey],"CONVERT(VARCHAR(32),HashBytes('MD5', CONCAT('Business Central - CO001',[No])),2)"
+DIM_Vendors,1,[VendorDimKey],sat.[VendorDimKey]
+DIM_Vendors,2,[VendorId],sat.[VendorId]
+DIM_Vendors,3,[CompanyCode],sat.[CompanyCode]
+DIM_Vendors,4,[CreditLimit],sat.[CreditLimit]
+DIM_Vendors,5,[CreditRating],sat.[CreditRating]
+DIM_Vendors,6,[DeliveryTerms],sat.[DeliveryTerms]
+DIM_Vendors,7,[DeliveryTermsCode],sat.[DeliveryTermsCode]
+DIM_Vendors,8,[FreightZone],sat.[FreightZone]
+DIM_Vendors,9,[MethodofPayment],sat.[MethodofPayment]
+DIM_Vendors,10,[MethodofPaymentCode],sat.[MethodofPaymentCode]
+DIM_Vendors,11,[ModeofDelivery],sat.[ModeofDelivery]
+DIM_Vendors,12,[ModeofDeliveryCode],sat.[ModeofDeliveryCode]
+DIM_Vendors,13,[PaymenTerms],sat.[PaymenTerms]
+DIM_Vendors,14,[PaymentTermsCode],sat.[PaymentTermsCode]
+DIM_Vendors,15,[PurchasePool],sat.[PurchasePool]
+DIM_Vendors,16,[PurchasePoolCode],sat.[PurchasePoolCode]
+DIM_Vendors,17,[Segment],sat.[Segment]
+DIM_Vendors,18,[SegmentCode],sat.[SegmentCode]
+DIM_Vendors,19,[Subsegment],sat.[Subsegment]
+DIM_Vendors,20,[SubsegmentCode],sat.[SubsegmentCode]
+DIM_Vendors,21,[VendorCity],sat.[VendorCity]
+DIM_Vendors,22,[VendorCode],sat.[VendorCode]
+DIM_Vendors,23,[VendorCountryorRegion],sat.[VendorCountryorRegion]
+DIM_Vendors,24,[VendorGroup],sat.[VendorGroup]
+DIM_Vendors,25,[VendorGroupCode],sat.[VendorGroupCode]
+DIM_Vendors,26,[VendorName],sat.[VendorName]
+DIM_Vendors,27,[VendorState],sat.[VendorState]
+DIM_Vendors,28,[VendorPostCode],sat.[VendorPostCode]
+DIM_Vendors,29,[RecordSource],sat.[RecordSource]
+HUB_Vendors,1,[VendorDimKey],[VendorDimKey]
+HUB_Vendors,2,[RecordSource],[RecordSource]
+HUB_Vendors,3,[VendorId],[VendorId]
+SAT_Vendors_CO001,1,[VendorDimKey],CAST(NULL AS varchar(255))
+SAT_Vendors_CO001,2,[VendorId],CAST(NULL AS bigint)
+SAT_Vendors_CO001,3,[CompanyCode],CAST(NULL AS nvarchar(8))
+SAT_Vendors_CO001,4,[CreditLimit],CAST(NULL AS numeric)
+SAT_Vendors_CO001,5,[CreditRating],CAST(NULL AS nvarchar(20))
+SAT_Vendors_CO001,6,[DeliveryTerms],CAST(NULL AS nvarchar(120))
+SAT_Vendors_CO001,7,[DeliveryTermsCode],CAST(NULL AS nvarchar(20))
+SAT_Vendors_CO001,8,[FreightZone],CAST(NULL AS nvarchar(20))
+SAT_Vendors_CO001,9,[MethodofPayment],CAST(NULL AS nvarchar(120))
+SAT_Vendors_CO001,10,[MethodofPaymentCode],CAST(NULL AS nvarchar(20))
+SAT_Vendors_CO001,11,[ModeofDelivery],CAST(NULL AS nvarchar(120))
+SAT_Vendors_CO001,12,[ModeofDeliveryCode],CAST(NULL AS nvarchar(20))
+SAT_Vendors_CO001,13,[PaymenTerms],CAST(NULL AS nvarchar(120))
+SAT_Vendors_CO001,14,[PaymentTermsCode],CAST(NULL AS nvarchar(200))
+SAT_Vendors_CO001,15,[PurchasePool],CAST(NULL AS nvarchar(120))
+SAT_Vendors_CO001,16,[PurchasePoolCode],CAST(NULL AS nvarchar(20))
+SAT_Vendors_CO001,17,[Segment],CAST(NULL AS nvarchar(120))
+SAT_Vendors_CO001,18,[SegmentCode],CAST(NULL AS nvarchar(40))
+SAT_Vendors_CO001,19,[Subsegment],CAST(NULL AS nvarchar(120))
+SAT_Vendors_CO001,20,[SubsegmentCode],CAST(NULL AS nvarchar(40))
+SAT_Vendors_CO001,21,[VendorCity],CAST(NULL AS nvarchar(120))
+SAT_Vendors_CO001,22,[VendorCode],CAST(NULL AS nvarchar(40))
+SAT_Vendors_CO001,23,[VendorCountryorRegion],CAST(NULL AS nvarchar(20))
+SAT_Vendors_CO001,24,[VendorGroup],CAST(NULL AS nvarchar(120))
+SAT_Vendors_CO001,25,[VendorGroupCode],CAST(NULL AS nvarchar(20))
+SAT_Vendors_CO001,26,[VendorName],CAST(NULL AS nvarchar(200))
+SAT_Vendors_CO001,27,[VendorState],CAST(NULL AS nvarchar(20))
+SAT_Vendors_CO001,28,[VendorPostCode],CAST(NULL AS nvarchar(20))
+SAT_Vendors_CO001,29,[RecordSource],CAST(NULL AS varchar(200))
+SRC_Vendors_CO001,1,[No],[No]
+SRC_Vendors_CO001,2,[Name],[Name]
+SRC_Vendors_CO001,3,[Name_2],[Name_2]
+SRC_Vendors_CO001,4,[Blocked],[Blocked]
+SRC_Vendors_CO001,5,[Privacy_Blocked],[Privacy_Blocked]
+SRC_Vendors_CO001,6,[Last_Date_Modified],[Last_Date_Modified]
+SRC_Vendors_CO001,7,[Balance_LCY],[Balance_LCY]
+SRC_Vendors_CO001,8,[BalanceAsCustomer],[BalanceAsCustomer]
+SRC_Vendors_CO001,9,[Balance_Due_LCY],[Balance_Due_LCY]
+SRC_Vendors_CO001,10,[Document_Sending_Profile],[Document_Sending_Profile]
+SRC_Vendors_CO001,11,[Search_Name],[Search_Name]
+SRC_Vendors_CO001,12,[IC_Partner_Code],[IC_Partner_Code]
+SRC_Vendors_CO001,13,[Purchaser_Code],[Purchaser_Code]
+SRC_Vendors_CO001,14,[Responsibility_Center],[Responsibility_Center]
+SRC_Vendors_CO001,15,[Disable_Search_by_Name],[Disable_Search_by_Name]
+SRC_Vendors_CO001,16,[Company_Size_Code],[Company_Size_Code]
+SRC_Vendors_CO001,17,[LookupAddress],[LookupAddress]
+SRC_Vendors_CO001,18,[Address],[Address]
+SRC_Vendors_CO001,19,[Address_2],[Address_2]
+SRC_Vendors_CO001,20,[Country_Region_Code],[Country_Region_Code]
+SRC_Vendors_CO001,21,[City],[City]
+SRC_Vendors_CO001,22,[County],[County]
+SRC_Vendors_CO001,23,[Post_Code],[Post_Code]
+SRC_Vendors_CO001,24,[ShowMap],[ShowMap]
+SRC_Vendors_CO001,25,[Phone_No],[Phone_No]
+SRC_Vendors_CO001,26,[MobilePhoneNo],[MobilePhoneNo]
+SRC_Vendors_CO001,27,[E_Mail],[E_Mail]
+SRC_Vendors_CO001,28,[Fax_No],[Fax_No]
+SRC_Vendors_CO001,29,[Home_Page],[Home_Page]
+SRC_Vendors_CO001,30,[Our_Account_No],[Our_Account_No]
+SRC_Vendors_CO001,31,[Language_Code],[Language_Code]
+SRC_Vendors_CO001,32,[Format_Region],[Format_Region]
+SRC_Vendors_CO001,33,[Primary_Contact_No],[Primary_Contact_No]
+SRC_Vendors_CO001,34,[Control16],[Control16]
+SRC_Vendors_CO001,35,[VAT_Registration_No],[VAT_Registration_No]
+SRC_Vendors_CO001,36,[EORI_Number],[EORI_Number]
+SRC_Vendors_CO001,37,[GLN],[GLN]
+SRC_Vendors_CO001,38,[Tax_Liable],[Tax_Liable]
+SRC_Vendors_CO001,39,[Tax_Area_Code],[Tax_Area_Code]
+SRC_Vendors_CO001,40,[Pay_to_Vendor_No],[Pay_to_Vendor_No]
+SRC_Vendors_CO001,41,[Invoice_Disc_Code],[Invoice_Disc_Code]
+SRC_Vendors_CO001,42,[Prices_Including_VAT],[Prices_Including_VAT]
+SRC_Vendors_CO001,43,[Price_Calculation_Method],[Price_Calculation_Method]
+SRC_Vendors_CO001,44,[Registration_Number],[Registration_Number]
+SRC_Vendors_CO001,45,[Gen_Bus_Posting_Group],[Gen_Bus_Posting_Group]
+SRC_Vendors_CO001,46,[VAT_Bus_Posting_Group],[VAT_Bus_Posting_Group]
+SRC_Vendors_CO001,47,[Vendor_Posting_Group],[Vendor_Posting_Group]
+SRC_Vendors_CO001,48,[Allow_Multiple_Posting_Groups],[Allow_Multiple_Posting_Groups]
+SRC_Vendors_CO001,49,[Currency_Code],[Currency_Code]
+SRC_Vendors_CO001,50,[Prepayment_Percent],[Prepayment_Percent]
+SRC_Vendors_CO001,51,[Application_Method],[Application_Method]
+SRC_Vendors_CO001,52,[Payment_Terms_Code],[Payment_Terms_Code]
+SRC_Vendors_CO001,53,[Payment_Method_Code],[Payment_Method_Code]
+SRC_Vendors_CO001,54,[Priority],[Priority]
+SRC_Vendors_CO001,55,[Block_Payment_Tolerance],[Block_Payment_Tolerance]
+SRC_Vendors_CO001,56,[Preferred_Bank_Account_Code],[Preferred_Bank_Account_Code]
+SRC_Vendors_CO001,57,[Partner_Type],[Partner_Type]
+SRC_Vendors_CO001,58,[Intrastat_Partner_Type],[Intrastat_Partner_Type]
+SRC_Vendors_CO001,59,[Cash_Flow_Payment_Terms_Code],[Cash_Flow_Payment_Terms_Code]
+SRC_Vendors_CO001,60,[Creditor_No],[Creditor_No]
+SRC_Vendors_CO001,61,[Exclude_from_Pmt_Pract_Rep],[Exclude_from_Pmt_Pract_Rep]
+SRC_Vendors_CO001,62,[Exclude_from_Pmt_Practices],[Exclude_from_Pmt_Practices]
+SRC_Vendors_CO001,63,[Location_Code],[Location_Code]
+SRC_Vendors_CO001,64,[Shipment_Method_Code],[Shipment_Method_Code]
+SRC_Vendors_CO001,65,[Lead_Time_Calculation],[Lead_Time_Calculation]
+SRC_Vendors_CO001,66,[Base_Calendar_Code],[Base_Calendar_Code]
+SRC_Vendors_CO001,67,[Customized_Calendar],[Customized_Calendar]
+SRC_Vendors_CO001,68,[Over_Receipt_Code],[Over_Receipt_Code]
+SRC_Vendors_CO001,69,[Receive_E_Document_To],[Receive_E_Document_To]
+SRC_Vendors_CO001,70,[Default_Trans_Type],[Default_Trans_Type]
+SRC_Vendors_CO001,71,[Default_Trans_Type_Return],[Default_Trans_Type_Return]
+SRC_Vendors_CO001,72,[Def_Transport_Method],[Def_Transport_Method]
+SRC_Vendors_CO001,73,[Global_Dimension_1_Filter],[Global_Dimension_1_Filter]
+SRC_Vendors_CO001,74,[Global_Dimension_2_Filter],[Global_Dimension_2_Filter]
+SRC_Vendors_CO001,75,[Currency_Filter],[Currency_Filter]
+SRC_Vendors_CO001,76,[Date_Filter],[Date_Filter]
+SRC_Vendors_CO001,77,[RecordSource],'Business Central - CO001'
+SRC_Vendors_CO001,78,[HashKey],"CONVERT(VARCHAR(32),HashBytes('MD5', CONCAT('Business Central - CO001',[No])),2)"
+FACT_FinancialActivity,1,[FinancialActivityKey],sat.[FinancialActivityKey]
+FACT_FinancialActivity,2,[CompanyDimKey],sat.[CompanyDimKey]
+FACT_FinancialActivity,3,[CurrencyDimKey],sat.[CurrencyDimKey]
+FACT_FinancialActivity,4,[DateDimKey],sat.[DateDimKey]
+FACT_FinancialActivity,5,[DocumentDateDateDimKey],sat.[DocumentDateDateDimKey]
+FACT_FinancialActivity,6,[FiscalCalendarDimKey],sat.[FiscalCalendarDimKey]
+FACT_FinancialActivity,7,[LedgerDimKey],sat.[LedgerDimKey]
+FACT_FinancialActivity,8,[LedgerDimensionDimKey],sat.[LedgerDimensionDimKey]
+FACT_FinancialActivity,9,[MainAccountCategoryDimKey],sat.[MainAccountCategoryDimKey]
+FACT_FinancialActivity,10,[MainAccountDimKey],sat.[MainAccountDimKey]
+FACT_FinancialActivity,11,[PartitionDimKey],sat.[PartitionDimKey]
+FACT_FinancialActivity,12,[GeneralLedgerId],sat.[GeneralLedgerId]
+FACT_FinancialActivity,13,[GeneralJournalEntryId],sat.[GeneralJournalEntryId]
+FACT_FinancialActivity,14,[AccountingCurrencyAmount],sat.[AccountingCurrencyAmount]
+FACT_FinancialActivity,15,[CrediDebit],sat.[CrediDebit]
+FACT_FinancialActivity,16,[DocumentNumber],sat.[DocumentNumber]
+FACT_FinancialActivity,17,[FisalPeriodId],sat.[FisalPeriodId]
+FACT_FinancialActivity,18,[JournalCategory],sat.[JournalCategory]
+FACT_FinancialActivity,19,[JournalNumber],sat.[JournalNumber]
+FACT_FinancialActivity,20,[LedgerText],sat.[LedgerText]
+FACT_FinancialActivity,21,[PostingType],sat.[PostingType]
+FACT_FinancialActivity,22,[Quantity],sat.[Quantity]
+FACT_FinancialActivity,23,[ReportingCurrencyAmount],sat.[ReportingCurrencyAmount]
+FACT_FinancialActivity,24,[TransactionCurrencyAmount],sat.[TransactionCurrencyAmount]
+FACT_FinancialActivity,25,[Voucher],sat.[Voucher]
+FACT_FinancialActivity,26,[RecordSource],sat.[RecordSource]
+HUB_FinancialActivity,1,[FinancialActivityKey],[FinancialActivityKey]
+HUB_FinancialActivity,2,[RecordSource],[RecordSource]
+HUB_FinancialActivity,3,[Voucher],[Voucher]
+SAT_FinancialActivity_CO001,1,[FinancialActivityKey],CAST(NULL AS varchar(255))
+SAT_FinancialActivity_CO001,2,[CompanyDimKey],CAST(NULL AS varchar(255))
+SAT_FinancialActivity_CO001,3,[CurrencyDimKey],CAST(NULL AS varchar(255))
+SAT_FinancialActivity_CO001,4,[DateDimKey],CAST(NULL AS bigint)
+SAT_FinancialActivity_CO001,5,[DocumentDateDateDimKey],CAST(NULL AS bigint)
+SAT_FinancialActivity_CO001,6,[FiscalCalendarDimKey],CAST(NULL AS varchar(255))
+SAT_FinancialActivity_CO001,7,[LedgerDimKey],CAST(NULL AS varchar(255))
+SAT_FinancialActivity_CO001,8,[LedgerDimensionDimKey],CAST(NULL AS varchar(255))
+SAT_FinancialActivity_CO001,9,[MainAccountCategoryDimKey],CAST(NULL AS varchar(255))
+SAT_FinancialActivity_CO001,10,[MainAccountDimKey],CAST(NULL AS varchar(255))
+SAT_FinancialActivity_CO001,11,[PartitionDimKey],CAST(NULL AS varchar(255))
+SAT_FinancialActivity_CO001,12,[GeneralLedgerId],CAST(NULL AS bigint)
+SAT_FinancialActivity_CO001,13,[GeneralJournalEntryId],CAST(NULL AS bigint)
+SAT_FinancialActivity_CO001,14,[AccountingCurrencyAmount],"CAST(NULL AS numeric(32,6))"
+SAT_FinancialActivity_CO001,15,[CrediDebit],CAST(NULL AS nvarchar(20))
+SAT_FinancialActivity_CO001,16,[DocumentNumber],CAST(NULL AS nvarchar(40))
+SAT_FinancialActivity_CO001,17,[FisalPeriodId],CAST(NULL AS bigint)
+SAT_FinancialActivity_CO001,18,[JournalCategory],CAST(NULL AS nvarchar(50))
+SAT_FinancialActivity_CO001,19,[JournalNumber],CAST(NULL AS nvarchar(40))
+SAT_FinancialActivity_CO001,20,[LedgerText],CAST(NULL AS nvarchar(1024))
+SAT_FinancialActivity_CO001,21,[PostingType],CAST(NULL AS nvarchar(50))
+SAT_FinancialActivity_CO001,22,[Quantity],"CAST(NULL AS numeric(32,6))"
+SAT_FinancialActivity_CO001,23,[ReportingCurrencyAmount],"CAST(NULL AS numeric(32,6))"
+SAT_FinancialActivity_CO001,24,[TransactionCurrencyAmount],"CAST(NULL AS numeric(32,6))"
+SAT_FinancialActivity_CO001,25,[Voucher],CAST(NULL AS nvarchar(40))
+SAT_FinancialActivity_CO001,26,[RecordSource],CAST(NULL AS nvarchar(255))
+SRC_FinancialActivity_CO001,1,[Entry_No],[Entry_No]
+SRC_FinancialActivity_CO001,2,[Posting_Date],[Posting_Date]
+SRC_FinancialActivity_CO001,3,[Entry_Type],[Entry_Type]
+SRC_FinancialActivity_CO001,4,[Document_Type],[Document_Type]
+SRC_FinancialActivity_CO001,5,[Document_No],[Document_No]
+SRC_FinancialActivity_CO001,6,[Document_Line_No],[Document_Line_No]
+SRC_FinancialActivity_CO001,7,[Item_No],[Item_No]
+SRC_FinancialActivity_CO001,8,[Variant_Code],[Variant_Code]
+SRC_FinancialActivity_CO001,9,[Description],[Description]
+SRC_FinancialActivity_CO001,10,[Return_Reason_Code],[Return_Reason_Code]
+SRC_FinancialActivity_CO001,11,[Global_Dimension_1_Code],[Global_Dimension_1_Code]
+SRC_FinancialActivity_CO001,12,[Global_Dimension_2_Code],[Global_Dimension_2_Code]
+SRC_FinancialActivity_CO001,13,[Expiration_Date],[Expiration_Date]
+SRC_FinancialActivity_CO001,14,[Serial_No],[Serial_No]
+SRC_FinancialActivity_CO001,15,[Lot_No],[Lot_No]
+SRC_FinancialActivity_CO001,16,[Package_No],[Package_No]
+SRC_FinancialActivity_CO001,17,[Location_Code],[Location_Code]
+SRC_FinancialActivity_CO001,18,[Quantity],[Quantity]
+SRC_FinancialActivity_CO001,19,[RunningBalance],[RunningBalance]
+SRC_FinancialActivity_CO001,20,[RunningBalanceLoc],[RunningBalanceLoc]
+SRC_FinancialActivity_CO001,21,[Invoiced_Quantity],[Invoiced_Quantity]
+SRC_FinancialActivity_CO001,22,[Remaining_Quantity],[Remaining_Quantity]
+SRC_FinancialActivity_CO001,23,[Shipped_Qty_Not_Returned],[Shipped_Qty_Not_Returned]
+SRC_FinancialActivity_CO001,24,[Reserved_Quantity],[Reserved_Quantity]
+SRC_FinancialActivity_CO001,25,[Qty_per_Unit_of_Measure],[Qty_per_Unit_of_Measure]
+SRC_FinancialActivity_CO001,26,[Unit_of_Measure_Code],[Unit_of_Measure_Code]
+SRC_FinancialActivity_CO001,27,[Sales_Amount_Expected],[Sales_Amount_Expected]
+SRC_FinancialActivity_CO001,28,[Sales_Amount_Actual],[Sales_Amount_Actual]
+SRC_FinancialActivity_CO001,29,[Cost_Amount_Expected],[Cost_Amount_Expected]
+SRC_FinancialActivity_CO001,30,[Cost_Amount_Actual],[Cost_Amount_Actual]
+SRC_FinancialActivity_CO001,31,[Cost_Amount_Non_Invtbl],[Cost_Amount_Non_Invtbl]
+SRC_FinancialActivity_CO001,32,[Cost_Amount_Expected_ACY],[Cost_Amount_Expected_ACY]
+SRC_FinancialActivity_CO001,33,[Cost_Amount_Actual_ACY],[Cost_Amount_Actual_ACY]
+SRC_FinancialActivity_CO001,34,[Cost_Amount_Non_Invtbl_ACY],[Cost_Amount_Non_Invtbl_ACY]
+SRC_FinancialActivity_CO001,35,[Completely_Invoiced],[Completely_Invoiced]
+SRC_FinancialActivity_CO001,36,[Open],[Open]
+SRC_FinancialActivity_CO001,37,[Drop_Shipment],[Drop_Shipment]
+SRC_FinancialActivity_CO001,38,[Assemble_to_Order],[Assemble_to_Order]
+SRC_FinancialActivity_CO001,39,[Applied_Entry_to_Adjust],[Applied_Entry_to_Adjust]
+SRC_FinancialActivity_CO001,40,[Order_Type],[Order_Type]
+SRC_FinancialActivity_CO001,41,[Order_No],[Order_No]
+SRC_FinancialActivity_CO001,42,[Order_Line_No],[Order_Line_No]
+SRC_FinancialActivity_CO001,43,[Prod_Order_Comp_Line_No],[Prod_Order_Comp_Line_No]
+SRC_FinancialActivity_CO001,44,[Job_No],[Job_No]
+SRC_FinancialActivity_CO001,45,[Job_Task_No],[Job_Task_No]
+SRC_FinancialActivity_CO001,46,[Dimension_Set_ID],[Dimension_Set_ID]
+SRC_FinancialActivity_CO001,47,[Shortcut_Dimension_3_Code],[Shortcut_Dimension_3_Code]
+SRC_FinancialActivity_CO001,48,[Shortcut_Dimension_4_Code],[Shortcut_Dimension_4_Code]
+SRC_FinancialActivity_CO001,49,[Shortcut_Dimension_5_Code],[Shortcut_Dimension_5_Code]
+SRC_FinancialActivity_CO001,50,[Shortcut_Dimension_6_Code],[Shortcut_Dimension_6_Code]
+SRC_FinancialActivity_CO001,51,[Shortcut_Dimension_7_Code],[Shortcut_Dimension_7_Code]
+SRC_FinancialActivity_CO001,52,[Shortcut_Dimension_8_Code],[Shortcut_Dimension_8_Code]
+SRC_FinancialActivity_CO001,53,[Source_Type],[Source_Type]
+SRC_FinancialActivity_CO001,54,[Source_No],[Source_No]
+SRC_FinancialActivity_CO001,55,[RecordSource],'Business Central - CO001'
+SRC_FinancialActivity_CO001,56,[HashKey],"CONVERT(VARCHAR(32),HashBytes('MD5', CONCAT('Business Central - CO001',[Entry_No])),2)"

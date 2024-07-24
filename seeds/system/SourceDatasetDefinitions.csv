@@ -1,3 +1,4 @@
 ﻿TargetModel,Thread,SourceDataset,WhereClause
-SRC_Orders_SYS001,1,WorldWideImporters.Sales.Orders,1 = 1
-SRC_Customers_SYS001,2,WorldWideImporters.Sales.Customers,1 = 1
+SRC_Customers_CO001,1,dbo.Customers_CO001,1 = 1
+SRC_Vendors_CO001,1,dbo.Vendors_CO001,1 = 1
+SRC_FinancialActivity_CO001,1,dbo.ItemLedgerEntries_CO001,1 = 1

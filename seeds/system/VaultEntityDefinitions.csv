@@ -1,3 +1,4 @@
 EntityId,LinkApplicable,Calculations,DimOrFact
-Customers,0,1,DIM
-Orders,1,0,FACT
+Customers,0,0,DIM
+Vendors,0,0,DIM
+FinancialActivity,0,0,FACT

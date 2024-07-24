@@ -5,7 +5,7 @@
 {% macro default__rebuild_silver_hubs() %}
     {# -- PROCESS ALL ENTITIES -- #}
     {%- set sql_statement -%}
-        SELECT EntityId FROM REF.VaultEntityDefinitions 
+        SELECT [EntityId] FROM REF.VaultEntityDefinitions 
     {%- endset -%}
     {%- set results1 = run_query(sql_statement) -%}
     {%- for result1 in results1 -%}
@@ -24,7 +24,7 @@
         {# -- NEED ONE HUB PER ENTITY SET -- #}
         {%- set sql_view = namespace(ddl="") -%}
         {%- set sql_statement -%}
-            SELECT SystemId FROM REF.SystemDefinitions 
+            SELECT [SystemId] FROM REF.SystemDefinitions 
         {%- endset -%}
         {%- set results2 = run_query(sql_statement) -%}
         {%- for result2 in results2 -%}
@@ -67,7 +67,7 @@
 {% macro fabric__rebuild_silver_hubs() %}
     {# -- PROCESS ALL ENTITIES -- #}
     {%- set sql_statement -%}
-        SELECT EntityId FROM REF.VaultEntityDefinitions 
+        SELECT [EntityId] FROM REF.VaultEntityDefinitions 
     {%- endset -%}
     {%- set results1 = run_query(sql_statement) -%}
     {%- for result1 in results1 -%}
@@ -86,7 +86,7 @@
         {# -- NEED ONE HUB PER ENTITY SET -- #}
         {%- set sql_view = namespace(ddl="") -%}
         {%- set sql_statement -%}
-            SELECT SystemId FROM REF.SystemDefinitions 
+            SELECT [SystemId] FROM REF.SystemDefinitions 
         {%- endset -%}
         {%- set results2 = run_query(sql_statement) -%}
         {%- for result2 in results2 -%}

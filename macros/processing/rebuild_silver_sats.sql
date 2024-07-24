@@ -5,7 +5,7 @@
 {% macro default__rebuild_silver_sats(thread) %}
     {# -- NEED ONE SAT PER SOURCE -- #}
     {%- set sql_statement -%}
-        SELECT TargetModel FROM REF.SourceDatasetDefinitions WHERE Thread = {{ thread }}
+        SELECT [TargetModel] FROM REF.SourceDatasetDefinitions WHERE [Thread] = {{ thread }}
     {%- endset -%}
     {%- set results = run_query(sql_statement) -%}
     {%- set stopwatch_start = run_started_at.strftime('%Y-%m-%d %H:%M:%S') -%}
@@ -38,10 +38,10 @@
                 AS
                 SELECT 
                         {{ get_field_mappings2(target) }}
-                        ,1 AS VaultVersion
-                        ,'Passthru - vault inactive' AS VaultState
-                        ,CAST('{{ stopwatch_start }}' AS DATETIME2(6)) as VaultEffectiveFrom
-                        ,CAST(NULL AS DATETIME2(6)) as VaultEffectiveTo
+                        ,1 AS [VaultVersion]
+                        ,'Passthru - vault inactive' AS [VaultState]
+                        ,CAST('{{ stopwatch_start }}' AS DATETIME2(6)) AS [VaultEffectiveFrom]
+                        ,CAST(NULL AS DATETIME2(6)) AS [VaultEffectiveTo]
 
                     FROM STG.{{ source }} AS src
                     
@@ -51,7 +51,7 @@
 
             {%- set sql_statement -%}
                 if OBJECT_ID('RAW.{{ target }}_ActiveOnly', 'V') IS NOT NULL
-                    DROP VIEW RAW.{{ target }}
+                    DROP VIEW RAW.{{ target }}_ActiveOnly
             {%- endset -%}
             {{ print("Attempting operation ----->\n" ~ sql_statement) }}
             {% do run_query(sql_statement) %}
@@ -62,7 +62,7 @@
                         *
                         
                     FROM RAW.{{ target }}
-                    WHERE VaultEffectiveTo IS NULL
+                    WHERE [VaultEffectiveTo] IS NULL
 
             {%- endset -%}
             {{ print("Attempting operation ----->\n" ~ sql_statement) }}
@@ -87,10 +87,10 @@
                 AS
                 SELECT 
                         {{ get_field_mappings2(target) }}
-                        ,1 as VaultVersion
-                        ,'Initial load - active in vault' AS VaultState
-                        ,CAST('{{ stopwatch_start }}' AS DATETIME2(6)) AS VaultEffectiveFrom
-                        ,CAST(NULL AS DATETIME2(6)) AS VaultEffectiveTo
+                        ,1 AS [VaultVersion]
+                        ,'Initial load - active in vault' AS [VaultState]
+                        ,CAST('{{ stopwatch_start }}' AS DATETIME2(6)) AS [VaultEffectiveFrom]
+                        ,CAST(NULL AS DATETIME2(6)) AS [VaultEffectiveTo]
 
                     FROM STG.{{ source }} AS src
 
@@ -111,7 +111,7 @@
                             *
                             
                         FROM RAW.{{ target }}
-                        WHERE VaultEffectiveTo IS NULL
+                        WHERE [VaultEffectiveTo] IS NULL
 
                 {%- endset -%}
                 {{ print("Attempting operation ----->\n" ~ sql_statement) }}
@@ -124,14 +124,14 @@
                 INSERT INTO RAW.{{ target }}
                 SELECT 
                         {{ get_field_mappings2(target) }}
-                        ,(1 + COALESCE((select MAX(VaultVersion) FROM RAW.{{ target }} x WHERE x.HashKey = src.HashKey),0)) AS VaultVersion
-                        ,'Inserted - active in vault' AS VaultState
-                        ,CAST('{{ stopwatch_start }}' AS DATETIME2(6)) AS VaultEffectiveFrom
-                        ,CAST(NULL AS DATETIME2(6)) AS VaultEffectiveTo
+                        ,(1 + COALESCE((select MAX(VaultVersion) FROM RAW.{{ target }} x WHERE x.[HashKey] = src.[HashKey]),0)) AS [VaultVersion]
+                        ,'Inserted - active in vault' AS [VaultState]
+                        ,CAST('{{ stopwatch_start }}' AS DATETIME2(6)) AS [VaultEffectiveFrom]
+                        ,CAST(NULL AS DATETIME2(6)) AS [VaultEffectiveTo]
 
                     FROM STG.{{ source }} AS src
-                        FULL JOIN RAW.{{ target }} AS sat ON src.HashKey = sat.HashKey AND sat.VaultEffectiveTo IS NULL 
-                    WHERE src.HashKey <> COALESCE(sat.HashKey,'')
+                        FULL JOIN RAW.{{ target }} AS sat ON src.[HashKey] = sat.[HashKey] AND sat.[VaultEffectiveTo] IS NULL 
+                    WHERE src.[HashKey] <> COALESCE(sat.[HashKey],'')
 
             {%- endset -%}
             {{ print("Attempting operation ----->\n" ~ sql_statement) }}
@@ -140,8 +140,8 @@
             {# -- EXPIRE DELETED RECS IN VAULT -- #}
             {%- set sql_statement -%}
                 UPDATE RAW.{{ target }}
-                        SET VaultEffectiveTo = '{{ stopwatch_start }}', VaultState = 'Deleted - expired in vault'
-                    WHERE VaultEffectiveTo IS NULL AND HashKey NOT IN (SELECT HashKey FROM STG.{{ source }})
+                        SET [VaultEffectiveTo] = '{{ stopwatch_start }}', [VaultState] = 'Deleted - expired in vault'
+                    WHERE [VaultEffectiveTo] IS NULL AND [HashKey] NOT IN (SELECT [HashKey] FROM STG.{{ source }})
 
             {%- endset -%}
             {{ print("Attempting operation ----->\n" ~ sql_statement) }}
@@ -150,9 +150,9 @@
             {# -- EXPIRE UPDATED RECS IN VAULT -- #}
             {%- set sql_statement -%}
                 UPDATE sat
-                        SET sat.VaultEffectiveTo = '{{ stopwatch_start }}', sat.VaultState = 'Updated - versioned in vault'
+                        SET sat.[VaultEffectiveTo] = '{{ stopwatch_start }}', sat.[VaultState] = 'Updated - versioned in vault'
                     FROM RAW.{{ target }} AS sat 
-                        INNER JOIN STG.{{ source }} AS src ON sat.HashKey = src.HashKey AND sat.VaultEffectiveTo IS NULL AND sat.HashDiff <> src.HashDiff
+                        INNER JOIN STG.{{ source }} AS src ON sat.[HashKey] = src.[HashKey] AND sat.[VaultEffectiveTo] IS NULL AND sat.[HashDiff] <> src.[HashDiff]
 
             {%- endset -%}
             {{ print("Attempting operation ----->\n" ~ sql_statement) }}
@@ -163,14 +163,14 @@
                 INSERT INTO RAW.{{ target }}
                 SELECT 
                         {{ get_field_mappings2(target) }}
-                        ,(1 + COALESCE((SELECT MAX(VaultVersion) FROM RAW.{{ target }} x WHERE x.HashKey = src.HashKey),0)) AS VaultVersion
-                        ,'Inserted - active in vault' AS VaultState
-                        ,CAST('{{ stopwatch_start }}' AS DATETIME2(6)) AS VaultEffectiveFrom
-                        ,CAST(NULL AS DATETIME2(6)) AS VaultEffectiveTo
+                        ,(1 + COALESCE((SELECT MAX(VaultVersion) FROM RAW.{{ target }} x WHERE x.[HashKey] = src.[HashKey]),0)) AS [VaultVersion]
+                        ,'Inserted - active in vault' AS [VaultState]
+                        ,CAST('{{ stopwatch_start }}' AS DATETIME2(6)) AS [VaultEffectiveFrom]
+                        ,CAST(NULL AS DATETIME2(6)) AS [VaultEffectiveTo]
 
                     FROM STG.{{ source }} AS src
-                        FULL JOIN RAW.{{ target }} AS sat ON src.HashKey = sat.HashKey AND sat.VaultEffectiveTo IS NULL 
-                    WHERE src.HashKey <> COALESCE(sat.HashKey,'')
+                        FULL JOIN RAW.{{ target }} AS sat ON src.[HashKey] = sat.[HashKey] AND sat.[VaultEffectiveTo] IS NULL 
+                    WHERE src.[HashKey] <> COALESCE(sat.[HashKey],'')
 
             {%- endset -%}
             {{ print("Attempting operation ----->\n" ~ sql_statement) }}
@@ -182,7 +182,7 @@
 {% macro fabric__rebuild_silver_sats(thread) %}
     {# -- NEED ONE SAT PER SOURCE -- #}
     {%- set sql_statement -%}
-        SELECT TargetModel FROM REF.SourceDatasetDefinitions WHERE Thread = {{ thread }}
+        SELECT [TargetModel] FROM REF.SourceDatasetDefinitions WHERE [Thread] = {{ thread }}
     {%- endset -%}
     {%- set results = run_query(sql_statement) -%}
     {%- set stopwatch_start = run_started_at.strftime('%Y-%m-%d %H:%M:%S') -%}
@@ -215,10 +215,10 @@
                 AS
                 SELECT 
                         {{ get_field_mappings2(target) }}
-                        ,1 AS VaultVersion
-                        ,'Passthru - vault inactive' AS VaultState
-                        ,CAST('{{ stopwatch_start }}' AS DATETIME2(6)) as VaultEffectiveFrom
-                        ,CAST(NULL AS DATETIME2(6)) as VaultEffectiveTo
+                        ,1 AS [VaultVersion]
+                        ,'Passthru - vault inactive' AS [VaultState]
+                        ,CAST('{{ stopwatch_start }}' AS DATETIME2(6)) AS [VaultEffectiveFrom]
+                        ,CAST(NULL AS DATETIME2(6)) AS [VaultEffectiveTo]
 
                     FROM STG.{{ source }} AS src
                     
@@ -228,7 +228,7 @@
 
             {%- set sql_statement -%}
                 if OBJECT_ID('RAW.{{ target }}_ActiveOnly', 'V') IS NOT NULL
-                    DROP VIEW RAW.{{ target }}
+                    DROP VIEW RAW.{{ target }}_ActiveOnly
             {%- endset -%}
             {{ print("Attempting operation ----->\n" ~ sql_statement) }}
             {% do run_query(sql_statement) %}
@@ -239,7 +239,7 @@
                         *
                         
                     FROM RAW.{{ target }}
-                    WHERE VaultEffectiveTo IS NULL
+                    WHERE [VaultEffectiveTo] IS NULL
 
             {%- endset -%}
             {{ print("Attempting operation ----->\n" ~ sql_statement) }}
@@ -264,10 +264,10 @@
                 AS
                 SELECT 
                         {{ get_field_mappings2(target) }}
-                        ,1 as VaultVersion
-                        ,'Initial load - active in vault' AS VaultState
-                        ,CAST('{{ stopwatch_start }}' AS DATETIME2(6)) AS VaultEffectiveFrom
-                        ,CAST(NULL AS DATETIME2(6)) AS VaultEffectiveTo
+                        ,1 AS [VaultVersion]
+                        ,'Initial load - active in vault' AS [VaultState]
+                        ,CAST('{{ stopwatch_start }}' AS DATETIME2(6)) AS [VaultEffectiveFrom]
+                        ,CAST(NULL AS DATETIME2(6)) AS [VaultEffectiveTo]
 
                     FROM STG.{{ source }} AS src
 
@@ -288,7 +288,7 @@
                             *
                             
                         FROM RAW.{{ target }}
-                        WHERE VaultEffectiveTo IS NULL
+                        WHERE [VaultEffectiveTo] IS NULL
 
                 {%- endset -%}
                 {{ print("Attempting operation ----->\n" ~ sql_statement) }}
@@ -301,14 +301,14 @@
                 INSERT INTO RAW.{{ target }}
                 SELECT 
                         {{ get_field_mappings2(target) }}
-                        ,(1 + COALESCE((select MAX(VaultVersion) FROM RAW.{{ target }} x WHERE x.HashKey = src.HashKey),0)) AS VaultVersion
-                        ,'Inserted - active in vault' AS VaultState
-                        ,CAST('{{ stopwatch_start }}' AS DATETIME2(6)) AS VaultEffectiveFrom
-                        ,CAST(NULL AS DATETIME2(6)) AS VaultEffectiveTo
+                        ,(1 + COALESCE((select MAX(VaultVersion) FROM RAW.{{ target }} x WHERE x.[HashKey] = src.[HashKey]),0)) AS [VaultVersion]
+                        ,'Inserted - active in vault' AS [VaultState]
+                        ,CAST('{{ stopwatch_start }}' AS DATETIME2(6)) AS [VaultEffectiveFrom]
+                        ,CAST(NULL AS DATETIME2(6)) AS [VaultEffectiveTo]
 
                     FROM STG.{{ source }} AS src
-                        FULL JOIN RAW.{{ target }} AS sat ON src.HashKey = sat.HashKey AND sat.VaultEffectiveTo IS NULL 
-                    WHERE src.HashKey <> COALESCE(sat.HashKey,'')
+                        FULL JOIN RAW.{{ target }} AS sat ON src.[HashKey] = sat.[HashKey] AND sat.[VaultEffectiveTo] IS NULL 
+                    WHERE src.[HashKey] <> COALESCE(sat.[HashKey],'')
 
             {%- endset -%}
             {{ print("Attempting operation ----->\n" ~ sql_statement) }}
@@ -317,8 +317,8 @@
             {# -- EXPIRE DELETED RECS IN VAULT -- #}
             {%- set sql_statement -%}
                 UPDATE RAW.{{ target }}
-                        SET VaultEffectiveTo = '{{ stopwatch_start }}', VaultState = 'Deleted - expired in vault'
-                    WHERE VaultEffectiveTo IS NULL AND HashKey NOT IN (SELECT HashKey FROM STG.{{ source }})
+                        SET [VaultEffectiveTo] = '{{ stopwatch_start }}', [VaultState] = 'Deleted - expired in vault'
+                    WHERE [VaultEffectiveTo] IS NULL AND [HashKey] NOT IN (SELECT [HashKey] FROM STG.{{ source }})
 
             {%- endset -%}
             {{ print("Attempting operation ----->\n" ~ sql_statement) }}
@@ -327,9 +327,9 @@
             {# -- EXPIRE UPDATED RECS IN VAULT -- #}
             {%- set sql_statement -%}
                 UPDATE sat
-                        SET sat.VaultEffectiveTo = '{{ stopwatch_start }}', sat.VaultState = 'Updated - versioned in vault'
+                        SET sat.[VaultEffectiveTo] = '{{ stopwatch_start }}', sat.[VaultState] = 'Updated - versioned in vault'
                     FROM RAW.{{ target }} AS sat 
-                        INNER JOIN STG.{{ source }} AS src ON sat.HashKey = src.HashKey AND sat.VaultEffectiveTo IS NULL AND sat.HashDiff <> src.HashDiff
+                        INNER JOIN STG.{{ source }} AS src ON sat.[HashKey] = src.[HashKey] AND sat.[VaultEffectiveTo] IS NULL AND sat.[HashDiff] <> src.[HashDiff]
 
             {%- endset -%}
             {{ print("Attempting operation ----->\n" ~ sql_statement) }}
@@ -340,14 +340,14 @@
                 INSERT INTO RAW.{{ target }}
                 SELECT 
                         {{ get_field_mappings2(target) }}
-                        ,(1 + COALESCE((SELECT MAX(VaultVersion) FROM RAW.{{ target }} x WHERE x.HashKey = src.HashKey),0)) AS VaultVersion
-                        ,'Inserted - active in vault' AS VaultState
-                        ,CAST('{{ stopwatch_start }}' AS DATETIME2(6)) AS VaultEffectiveFrom
-                        ,CAST(NULL AS DATETIME2(6)) AS VaultEffectiveTo
+                        ,(1 + COALESCE((SELECT MAX(VaultVersion) FROM RAW.{{ target }} x WHERE x.[HashKey] = src.[HashKey]),0)) AS [VaultVersion]
+                        ,'Inserted - active in vault' AS [VaultState]
+                        ,CAST('{{ stopwatch_start }}' AS DATETIME2(6)) AS [VaultEffectiveFrom]
+                        ,CAST(NULL AS DATETIME2(6)) AS [VaultEffectiveTo]
 
                     FROM STG.{{ source }} AS src
-                        FULL JOIN RAW.{{ target }} AS sat ON src.HashKey = sat.HashKey AND sat.VaultEffectiveTo IS NULL 
-                    WHERE src.HashKey <> COALESCE(sat.HashKey,'')
+                        FULL JOIN RAW.{{ target }} AS sat ON src.[HashKey] = sat.[HashKey] AND sat.[VaultEffectiveTo] IS NULL 
+                    WHERE src.[HashKey] <> COALESCE(sat.[HashKey],'')
 
             {%- endset -%}
             {{ print("Attempting operation ----->\n" ~ sql_statement) }}
