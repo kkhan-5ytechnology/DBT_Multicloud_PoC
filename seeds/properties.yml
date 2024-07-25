@@ -20,6 +20,7 @@ seeds:
         Thread: int
         SourceDataset: varchar(8000)
         WhereClause: varchar(8000)
+        Notes: varchar(8000)
   - name: FieldMappingDefinitions
     config:
       column_types:
@@ -27,3 +28,4 @@ seeds:
         Sequence: int
         TargetField: varchar(8000)
         MappingExpression: varchar(8000)
+        Notes: varchar(8000)

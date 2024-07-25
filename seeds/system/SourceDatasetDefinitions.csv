@@ -1,6 +1,14 @@
-﻿TargetModel,Thread,SourceDataset,WhereClause
+﻿TargetModel,Thread,SourceDataset,WhereClause,Notes
+SRC_Companies_CO001,1,dbo.CompanyInformation_CO001,1 = 1,
+SRC_Currencies_CO001,1,dbo.Currencies_CO001,1 = 1,
 SRC_Customers_CO001,1,"[dbo].[Customers_CO001] AS [Customers] 
-LEFT JOIN [dbo].[CustomerPostingGroups_CO001] AS [CustomerPostingGroups] ON [Customers].[Customer_Posting_Group] = [CustomerPostingGroups].[Code]
-LEFT JOIN [dbo].[DefaultDimensions_CO001] AS [DefaultDimensions] ON [Customers].[No] = [DefaultDimensions].[No] AND [DefaultDimensions].[Table_ID] = 18 AND [DefaultDimensions].[Dimension_Code] = 'CUSTOMERGROUP'",1 = 1
-SRC_Vendors_CO001,1,dbo.Vendors_CO001,1 = 1
-SRC_FinancialActivity_CO001,1,dbo.ItemLedgerEntries_CO001,1 = 1
+LEFT JOIN [dbo].[CustomerPostingGroups_CO001] AS [CustomerPostingGroups] ON [Customers].[Customer_Posting_Group] = [CustomerPostingGroups].[Code] 
+LEFT JOIN [dbo].[DefaultDimensions_CO001] AS [DefaultDimensions] ON [Customers].[No] = [DefaultDimensions].[No] AND [DefaultDimensions].[Table_ID] = 18 AND [DefaultDimensions].[Dimension_Code] = 'CUSTOMERGROUP' 
+LEFT JOIN [dbo].[DimensionValueList_CO001] AS [DimensionValueList] ON [DefaultDimensions].[Dimension_Code] = [DimensionValueList].[Dimension_Code] AND [DefaultDimensions].[Dimension_Value_Code] = [DimensionValueList].[Code] 
+LEFT JOIN [dbo].[PaymentTerms_CO001] AS [PaymentTerms] ON [Customers].[Payment_Terms_Code] = [PaymentTerms].[Code] 
+LEFT JOIN [dbo].[PaymentMethods_CO001] AS [PaymentMethods] ON [Customers].[Payment_Method_Code] = [PaymentMethods].[Code] 
+LEFT JOIN [dbo].[CustomerPriceGroups_CO001] AS [CustomerPriceGroups] ON [Customers].[Customer_Price_Group] = [CustomerPriceGroups].[Code] 
+LEFT JOIN [dbo].[DefaultDimensions_CO001] AS [SalesGroupDimensions] ON [Customers].[No] = [SalesGroupDimensions].[No] AND [SalesGroupDimensions].[Table_ID] = 18 AND [SalesGroupDimensions].[Dimension_Code] = 'AREA' 
+LEFT JOIN [dbo].[DimensionValueList_CO001] AS [SalesGroupDimensionValueList] ON [SalesGroupDimensions].[Dimension_Code] = [SalesGroupDimensionValueList].[Dimension_Code] AND [SalesGroupDimensions].[Dimension_Value_Code] = [SalesGroupDimensionValueList].[Code] ",1 = 1,Joins to dimensions will need to be adjusted for customer specific sites.
+SRC_FinancialActivity_CO001,1,dbo.ItemLedgerEntries_CO001,1 = 1,
+SRC_Vendors_CO001,1,dbo.Vendors_CO001,1 = 1,

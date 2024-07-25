@@ -1,4 +1,6 @@
 EntityId,LinkApplicable,Calculations,DimOrFact
+Companies,0,0,DIM
+Currencies,0,0,DIM
 Customers,0,0,DIM
-Vendors,0,0,DIM
 FinancialActivity,0,0,FACT
+Vendors,0,0,DIM
