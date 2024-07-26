@@ -13,6 +13,8 @@ seeds:
         LinkApplicable: int
         Calculations: int
         DimOrFact: varchar(8000)
+        Process: int
+        Notes: varchar(8000)
   - name: SourceDatasetDefinitions
     config:
       column_types:
@@ -20,6 +22,7 @@ seeds:
         Thread: int
         SourceDataset: varchar(8000)
         WhereClause: varchar(8000)
+        Process: int
         Notes: varchar(8000)
   - name: FieldMappingDefinitions
     config:

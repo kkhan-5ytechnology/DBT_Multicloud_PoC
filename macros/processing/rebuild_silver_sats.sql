@@ -5,7 +5,7 @@
 {% macro default__rebuild_silver_sats(thread) %}
     {# -- NEED ONE SAT PER SOURCE -- #}
     {%- set sql_statement -%}
-        SELECT [TargetModel] FROM REF.SourceDatasetDefinitions WHERE [Thread] = {{ thread }}
+        SELECT [TargetModel] FROM REF.SourceDatasetDefinitions WHERE [Thread] = {{ thread }} AND [Process] = 1 
     {%- endset -%}
     {%- set results = run_query(sql_statement) -%}
     {%- set stopwatch_start = run_started_at.strftime('%Y-%m-%d %H:%M:%S') -%}
@@ -182,7 +182,7 @@
 {% macro fabric__rebuild_silver_sats(thread) %}
     {# -- NEED ONE SAT PER SOURCE -- #}
     {%- set sql_statement -%}
-        SELECT [TargetModel] FROM REF.SourceDatasetDefinitions WHERE [Thread] = {{ thread }}
+        SELECT [TargetModel] FROM REF.SourceDatasetDefinitions WHERE [Thread] = {{ thread }} AND [Process] = 1 
     {%- endset -%}
     {%- set results = run_query(sql_statement) -%}
     {%- set stopwatch_start = run_started_at.strftime('%Y-%m-%d %H:%M:%S') -%}
@@ -359,7 +359,7 @@
 {% macro databricks__rebuild_silver_sats(thread) %}
     {# -- NEED ONE SAT PER SOURCE -- #}
     {%- set sql_statement -%}
-        select TargetModel from ref.SourceDatasetDefinitions where Thread = {{ thread }}
+        select TargetModel from ref.SourceDatasetDefinitions where Thread = {{ thread }} AND Process = 1 
     {%- endset -%}
     {%- set results = run_query(sql_statement) -%}
     {%- set stopwatch_start = run_started_at.strftime('%Y-%m-%d %H:%M:%S') -%}

@@ -1,18 +1,18 @@
 {% macro tidyup() %}
     {% set query %}
-        drop view if exists dbo.thread1
+        drop view if exists RAW.thread1
     {% endset %}
     {% do run_query(query) %}
     {% set query %}
-        drop view if exists dbo.thread2
+        drop view if exists RAW.thread2
     {% endset %}
     {% do run_query(query) %}
     {% set query %}
-        drop view if exists dbo.thread3
+        drop view if exists RAW.thread3
     {% endset %}
     {% do run_query(query) %}
     {% set query %}
-        drop view if exists dbo.thread4
+        drop view if exists RAW.thread4
     {% endset %}
     {% do run_query(query) %}
 {% endmacro %}

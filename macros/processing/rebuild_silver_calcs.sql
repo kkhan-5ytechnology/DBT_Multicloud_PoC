@@ -5,7 +5,7 @@
 {% macro default__rebuild_silver_calcs() %}
     {# -- ALL ENTITIES THAT NEED A SAT -- #}
     {%- set sql_statement -%}
-        SELECT [EntityId] FROM REF.VaultEntityDefinitions WHERE [Calculations] = 1
+        SELECT [EntityId] FROM REF.VaultEntityDefinitions WHERE [Calculations] = 1 AND [Process] = 1
     {%- endset -%}
     {%- set results1 = run_query(sql_statement) -%}
     {%- set stopwatch_start = run_started_at.strftime('%Y-%m-%d %H:%M:%S') -%}
@@ -50,7 +50,7 @@
 {% macro fabric__rebuild_silver_calcs() %}
     {# -- ALL ENTITIES THAT NEED A SAT -- #}
     {%- set sql_statement -%}
-        SELECT [EntityId] FROM REF.VaultEntityDefinitions WHERE [Calculations] = 1
+        SELECT [EntityId] FROM REF.VaultEntityDefinitions WHERE [Calculations] = 1 AND [Process] = 1
     {%- endset -%}
     {%- set results1 = run_query(sql_statement) -%}
     {%- set stopwatch_start = run_started_at.strftime('%Y-%m-%d %H:%M:%S') -%}
@@ -95,7 +95,7 @@
 {% macro databricks__rebuild_silver_calcs() %}
     {# -- ALL ENTITIES THAT NEED A SAT -- #}
     {%- set sql_statement -%}
-        select EntityId from ref.VaultEntityDefinitions where Calculations = 1
+        select EntityId from ref.VaultEntityDefinitions where Calculations = 1 AND Process = 1
     {%- endset -%}
     {%- set results1 = run_query(sql_statement) -%}
     {%- set stopwatch_start = run_started_at.strftime('%Y-%m-%d %H:%M:%S') -%}

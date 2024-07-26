@@ -5,7 +5,7 @@
 {% macro default__rebuild_gold_layer() %}
     {# -- PROCESS ALL SEMANTIC MODEL ENTITIES -- #}
     {%- set sql_statement -%}
-        SELECT [EntityId], [DimOrFact] FROM REF.VaultEntityDefinitions WHERE [DimOrFact] IN ('DIM','FACT')
+        SELECT [EntityId], [DimOrFact] FROM REF.VaultEntityDefinitions WHERE [DimOrFact] IN ('DIM','FACT') AND [Process] = 1
     {%- endset -%}
     {%- set results1 = run_query(sql_statement) -%}
     {%- set stopwatch_start = run_started_at.strftime('%Y-%m-%d %H:%M:%S') -%}
@@ -74,7 +74,7 @@
 {% macro fabric__rebuild_gold_layer() %}
     {# -- PROCESS ALL SEMANTIC MODEL ENTITIES -- #}
     {%- set sql_statement -%}
-        SELECT [EntityId], [DimOrFact] FROM REF.VaultEntityDefinitions WHERE [DimOrFact] IN ('DIM','FACT')
+        SELECT [EntityId], [DimOrFact] FROM REF.VaultEntityDefinitions WHERE [DimOrFact] IN ('DIM','FACT') AND [Process] = 1
     {%- endset -%}
     {%- set results1 = run_query(sql_statement) -%}
     {%- set stopwatch_start = run_started_at.strftime('%Y-%m-%d %H:%M:%S') -%}
@@ -143,7 +143,7 @@
 {% macro databricks__rebuild_gold_layer() %}
     {# -- PROCESS ALL SEMANTIC MODEL ENTITIES -- #}
     {%- set sql_statement -%}
-        select EntityId, DimOrFact from ref.VaultEntityDefinitions where DimOrFact in ('DIM','FACT')
+        select EntityId, DimOrFact from ref.VaultEntityDefinitions where DimOrFact in ('DIM','FACT') AND Process = 1
     {%- endset -%}
     {%- set results1 = run_query(sql_statement) -%}
     {%- set stopwatch_start = run_started_at.strftime('%Y-%m-%d %H:%M:%S') -%}

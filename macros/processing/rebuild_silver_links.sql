@@ -5,7 +5,7 @@
 {% macro default__rebuild_silver_links() %}
     {# -- PROCESS ALL ENTITIES -- #}
     {%- set sql_statement -%}
-        SELECT [EntityId] FROM REF.VaultEntityDefinitions WHERE [LinkApplicable] = 1
+        SELECT [EntityId] FROM REF.VaultEntityDefinitions WHERE [LinkApplicable] = 1 AND [Process] = 1 
     {%- endset -%}
     {%- set results1 = run_query(sql_statement) -%}
     {%- for result1 in results1 -%}
@@ -67,7 +67,7 @@
 {% macro fabric__rebuild_silver_links() %}
     {# -- PROCESS ALL ENTITIES -- #}
     {%- set sql_statement -%}
-        SELECT [EntityId] FROM REF.VaultEntityDefinitions WHERE [LinkApplicable] = 1
+        SELECT [EntityId] FROM REF.VaultEntityDefinitions WHERE [LinkApplicable] = 1 AND [Process] = 1 
     {%- endset -%}
     {%- set results1 = run_query(sql_statement) -%}
     {%- for result1 in results1 -%}
@@ -129,7 +129,7 @@
 {% macro databricks__rebuild_silver_links() %}
     {# -- PROCESS ALL ENTITIES -- #}
     {%- set sql_statement -%}
-        select EntityId from ref.VaultEntityDefinitions where LinkApplicable = 1
+        select EntityId from ref.VaultEntityDefinitions where LinkApplicable = 1 AND Process = 1 
     {%- endset -%}
     {%- set results1 = run_query(sql_statement) -%}
     {%- for result1 in results1 -%}

@@ -3,7 +3,7 @@
 {%- endmacro %}
 
 {% macro default__rebuild_bronze_layer() %}
-    {%- set sql_statement = "SELECT [TargetModel] FROM [REF].[SourceDatasetDefinitions]" -%}
+    {%- set sql_statement = "SELECT [TargetModel] FROM [REF].[SourceDatasetDefinitions] WHERE [Process] = 1" -%}
     {%- set results = run_query(sql_statement) -%}
     
     {%- for result in results -%}
@@ -29,7 +29,7 @@
 {% endmacro %}
 
 {% macro fabric__rebuild_bronze_layer() %}
-    {%- set sql_statement = "SELECT [TargetModel] FROM [REF].[SourceDatasetDefinitions]" -%}
+    {%- set sql_statement = "SELECT [TargetModel] FROM [REF].[SourceDatasetDefinitions] WHERE [Process] = 1" -%}
     {%- set results = run_query(sql_statement) -%}
     
     {%- for result in results -%}
@@ -55,7 +55,7 @@
 {% endmacro %}
 
 {% macro databricks__rebuild_bronze_layer() %}
-    {%- set sql_statement = "select TargetModel from ref.SourceDatasetDefinitions" -%}
+    {%- set sql_statement = "select TargetModel from ref.SourceDatasetDefinitions WHERE Process = 1" -%}
     {%- set results = run_query(sql_statement) -%}
     
     {%- for result in results -%}
