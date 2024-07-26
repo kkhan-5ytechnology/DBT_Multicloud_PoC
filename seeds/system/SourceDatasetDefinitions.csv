@@ -15,22 +15,22 @@ LEFT JOIN [dbo].[DefaultDimensions_CO001] AS [SalesGroupDimensions] ON [Customer
 LEFT JOIN [dbo].[DimensionValueList_CO001] AS [SalesGroupDimensionValueList] ON [SalesGroupDimensions].[Dimension_Code] = [SalesGroupDimensionValueList].[Dimension_Code] AND [SalesGroupDimensions].[Dimension_Value_Code] = [SalesGroupDimensionValueList].[Code] ",1 = 1,0,Joins to dimensions will need to be adjusted for customer specific sites.
 SRC_DefaultDimensions_CO001,1,"[dbo].[DefaultDimensions_CO001] AS [DefaultDimensions]
 	INNER JOIN [dbo].[DimensionValueList_CO001] AS [DimensionValueList] ON [DefaultDimensions].[Dimension_Code] = [DimensionValueList].[Dimension_Code] AND [DefaultDimensions].[Dimension_Value_Code] = [DimensionValueList].[Code] ",1 = 1,0,
-SRC_MainAccounts_CO001,1,(SELECT NULL AS [Placeholder]) AS [PlaceHolder],1 = 0,1,TODO
-SRC_MainAccountCategories_CO001,1,(SELECT NULL AS [Placeholder]) AS [PlaceHolder],1 = 0,1,TODO
+SRC_MainAccounts_CO001,1,(SELECT NULL AS [Placeholder]) AS [PlaceHolder],1 = 0,0,TODO
+SRC_MainAccountCategories_CO001,1,(SELECT NULL AS [Placeholder]) AS [PlaceHolder],1 = 0,0,TODO
 SRC_FinancialActivity_CO001,1,dbo.ItemLedgerEntries_CO001,1 = 1,0,
 SRC_FinancialActivityKPIs_CO001,1,(SELECT NULL AS [Placeholder]) AS [PlaceHolder],1 = 0,0,TODO
 SRC_FiscalCalendar_CO001,1,(SELECT NULL AS [Placeholder]) AS [PlaceHolder],1 = 0,0,TODO
 SRC_Invoices_CO001,1,(SELECT NULL AS [Placeholder]) AS [PlaceHolder],1 = 0,0,TODO
 SRC_Inventory_CO001,1,(SELECT NULL AS [Placeholder]) AS [PlaceHolder],1 = 0,0,TODO
 SRC_Ledger_CO001,1,(SELECT NULL AS [Placeholder]) AS [PlaceHolder],1 = 0,0,TODO
-SRC_LedgerDimensions_CO001,1,(SELECT NULL AS [Placeholder]) AS [PlaceHolder],1 = 0,1,TODO
+SRC_LedgerDimensions_CO001,1,(SELECT NULL AS [Placeholder]) AS [PlaceHolder],1 = 0,0,TODO
 SRC_Orders_CO001,1,(SELECT NULL AS [Placeholder]) AS [PlaceHolder],1 = 0,0,TODO
-SRC_Partition_CO001,1,(SELECT NULL AS [Placeholder]) AS [PlaceHolder],1 = 0,0,TODO
+SRC_Partition_CO001,1,(SELECT NULL AS [Placeholder]) AS [PlaceHolder],1 = 0,1,TODO
 SRC_Payables_CO001,1,(SELECT NULL AS [Placeholder]) AS [PlaceHolder],1 = 0,0,TODO
-SRC_ProcurementCategories_CO001,1,(SELECT NULL AS [Placeholder]) AS [PlaceHolder],1 = 0,0,TODO
-SRC_Products_CO001,1,(SELECT NULL AS [Placeholder]) AS [PlaceHolder],1 = 0,0,TODO
-SRC_Projects_CO001,1,(SELECT NULL AS [Placeholder]) AS [PlaceHolder],1 = 0,0,TODO
-SRC_ProjectCategories_CO001,1,(SELECT NULL AS [Placeholder]) AS [PlaceHolder],1 = 0,0,TODO
+SRC_ProcurementCategories_CO001,1,(SELECT NULL AS [Placeholder]) AS [PlaceHolder],1 = 0,1,TODO
+SRC_Products_CO001,1,(SELECT NULL AS [Placeholder]) AS [PlaceHolder],1 = 0,1,TODO
+SRC_Projects_CO001,1,(SELECT NULL AS [Placeholder]) AS [PlaceHolder],1 = 0,1,TODO
+SRC_ProjectCategories_CO001,1,(SELECT NULL AS [Placeholder]) AS [PlaceHolder],1 = 0,1,TODO
 SRC_PurchaseInvoices_CO001,1,(SELECT NULL AS [Placeholder]) AS [PlaceHolder],1 = 0,0,TODO
 SRC_PurchaseOrders_CO001,1,(SELECT NULL AS [Placeholder]) AS [PlaceHolder],1 = 0,0,TODO
 SRC_PurchaseReceipts_CO001,1,(SELECT NULL AS [Placeholder]) AS [PlaceHolder],1 = 0,0,TODO
