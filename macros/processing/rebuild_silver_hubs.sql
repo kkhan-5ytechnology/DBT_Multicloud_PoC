@@ -1,5 +1,8 @@
 {% macro rebuild_silver_hubs() -%}
-    {{ return(adapter.dispatch('rebuild_silver_hubs')()) }}
+    {# -- DATAVAULT ACTIVE -- #}
+    {%- if var("vault_active") == True -%}
+        {{ return(adapter.dispatch('rebuild_silver_hubs')()) }}
+    {%- endif -%}
 {%- endmacro %}
 
 {% macro default__rebuild_silver_hubs() %}

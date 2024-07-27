@@ -1,5 +1,8 @@
 {% macro rebuild_silver_links() -%}
-    {{ return(adapter.dispatch('rebuild_silver_links')()) }}
+    {# -- DATAVAULT ACTIVE -- #}
+    {%- if var("vault_active") == True -%}
+        {{ return(adapter.dispatch('rebuild_silver_links')()) }}
+    {%- endif -%}    
 {%- endmacro %}
 
 {% macro default__rebuild_silver_links() %}
