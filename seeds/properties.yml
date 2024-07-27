@@ -6,6 +6,8 @@ seeds:
       column_types:
         SystemId: varchar(8000)
         Description: varchar(8000)
+        Process: int
+        Notes: varchar(8000)
   - name: VaultEntityDefinitions
     config:
       column_types:

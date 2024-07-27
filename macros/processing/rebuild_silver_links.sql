@@ -27,7 +27,7 @@
         {# -- NEED ONE LINK PER ENTITY SET -- #}
         {%- set sql_view = namespace(ddl="") -%}
         {%- set sql_statement -%}
-            SELECT [SystemId] FROM REF.SystemDefinitions 
+            SELECT [SystemId] FROM REF.SystemDefinitions WHERE [Process] = 1 
         {%- endset -%}
         {%- set results2 = run_query(sql_statement) -%}
         {%- for result2 in results2 -%}
@@ -89,7 +89,7 @@
         {# -- NEED ONE LINK PER ENTITY SET -- #}
         {%- set sql_view = namespace(ddl="") -%}
         {%- set sql_statement -%}
-            SELECT [SystemId] FROM REF.SystemDefinitions 
+            SELECT [SystemId] FROM REF.SystemDefinitions WHERE [Process] = 1 
         {%- endset -%}
         {%- set results2 = run_query(sql_statement) -%}
         {%- for result2 in results2 -%}
@@ -142,7 +142,7 @@
         {# -- NEED ONE LINK PER ENTITY SET -- #}
         {%- set sql_view = namespace(ddl="") -%}
         {%- set sql_statement -%}
-            select SystemId from ref.SystemDefinitions 
+            select SystemId from ref.SystemDefinitions where Process = 1 
         {%- endset -%}
         {%- set results2 = run_query(sql_statement) -%}
         {%- for result2 in results2 -%}
