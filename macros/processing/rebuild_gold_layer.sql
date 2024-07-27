@@ -31,7 +31,11 @@
         {%- set results2 = run_query(sql_statement) -%}
         {%- for result2 in results2 -%}
             {%- set systemid = result2.values()[0] -%}
-            {%- set sat = "SAT_" ~ entityid ~ "_" ~ systemid -%}
+            {%- if var("vault_active") == False -%}
+                {%- set sat = "SAT_" ~ entityid ~ "_" ~ systemid -%}
+            {%- else -%}
+                {%- set sat = "SAT_" ~ entityid ~ "_" ~ systemid ~ "_ActiveOnly" -%}
+            {%- endif -%}
             {%- set csat = "CSAT_" ~ entityid ~ "_" ~ systemid -%}
             
             {# -- GET LATEST SAT INFORMATION -- #}
@@ -42,7 +46,7 @@
                 SELECT 
                         {{ get_field_mappings2(target) }}
 
-                    FROM RAW.{{ sat }}_ActiveOnly AS sat
+                    FROM RAW.{{ sat }} AS sat
                     {% if check_table_exists(csat) == '[FOUND]' %}
                         LEFT JOIN RAW.{{ csat }} AS csat ON sat.[HashKey] = csat.[HashKey]
                     {% endif %}
@@ -55,7 +59,7 @@
                 SELECT 
                         {{ get_field_mappings2(target) }}
 
-                    FROM RAW.{{ sat }}_ActiveOnly AS sat
+                    FROM RAW.{{ sat }} AS sat
                     {% if check_table_exists(csat) == '[FOUND]' %}
                         LEFT JOIN RAW.{{ csat }} AS csat ON sat.[HashKey] = csat.[HashKey]
                     {% endif %} 
@@ -100,7 +104,11 @@
         {%- set results2 = run_query(sql_statement) -%}
         {%- for result2 in results2 -%}
             {%- set systemid = result2.values()[0] -%}
-            {%- set sat = "SAT_" ~ entityid ~ "_" ~ systemid -%}
+            {%- if var("vault_active") == False -%}
+                {%- set sat = "SAT_" ~ entityid ~ "_" ~ systemid -%}
+            {%- else -%}
+                {%- set sat = "SAT_" ~ entityid ~ "_" ~ systemid ~ "_ActiveOnly" -%}
+            {%- endif -%}
             {%- set csat = "CSAT_" ~ entityid ~ "_" ~ systemid -%}
 
             {# -- GET LATEST SAT INFORMATION -- #}
@@ -111,7 +119,7 @@
                 SELECT 
                         {{ get_field_mappings2(target) }}
 
-                    FROM RAW.{{ sat }}_ActiveOnly AS sat
+                    FROM RAW.{{ sat }} AS sat
                     {% if check_table_exists(csat) == '[FOUND]' %}
                         LEFT JOIN RAW.{{ csat }} AS csat ON sat.[HashKey] = csat.[HashKey]
                     {% endif %}
@@ -124,7 +132,7 @@
                 SELECT 
                         {{ get_field_mappings2(target) }}
 
-                    FROM RAW.{{ sat }}_ActiveOnly AS sat
+                    FROM RAW.{{ sat }} AS sat
                     {% if check_table_exists(csat) == '[FOUND]' %}
                         LEFT JOIN RAW.{{ csat }} AS csat ON sat.[HashKey] = csat.[HashKey]
                     {% endif %} 
@@ -160,7 +168,11 @@
         {%- set results2 = run_query(sql_statement) -%}
         {%- for result2 in results2 -%}
             {%- set systemid = result2.values()[0] -%}
-            {%- set sat = "SAT_" ~ entityid ~ "_" ~ systemid -%}
+            {%- if var("vault_active") == False -%}
+                {%- set sat = "SAT_" ~ entityid ~ "_" ~ systemid -%}
+            {%- else -%}
+                {%- set sat = "SAT_" ~ entityid ~ "_" ~ systemid ~ "_ActiveOnly" -%}
+            {%- endif -%}
             {%- set csat = "CSAT_" ~ entityid ~ "_" ~ systemid -%}
             
             {# -- GET LATEST SAT INFORMATION -- #}
@@ -171,7 +183,7 @@
                 select 
                         {{ get_field_mappings2(target) }}
 
-                    from raw.{{ sat }}_ActiveOnly as sat
+                    from raw.{{ sat }} as sat
                     {% if check_table_exists(csat) == '[FOUND]' %}
                         left join raw.{{ csat }} as csat on sat.HashKey = csat.HashKey
                     {% endif %}
@@ -184,7 +196,7 @@
                 select 
                         {{ get_field_mappings2(target) }}
 
-                    from raw.{{ sat }}_ActiveOnly as sat
+                    from raw.{{ sat }} as sat
                     {% if check_table_exists(csat) == '[FOUND]' %}
                         left join raw.{{ csat }} as csat on sat.HashKey = csat.HashKey
                     {% endif %} 

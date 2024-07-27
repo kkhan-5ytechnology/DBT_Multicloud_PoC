@@ -49,25 +49,6 @@
             {{ print("Attempting operation ----->\n" ~ sql_statement) }}
             {% do run_query(sql_statement) %}
 
-            {%- set sql_statement -%}
-                if OBJECT_ID('RAW.{{ target }}_ActiveOnly', 'V') IS NOT NULL
-                    DROP VIEW RAW.{{ target }}_ActiveOnly
-            {%- endset -%}
-            {{ print("Attempting operation ----->\n" ~ sql_statement) }}
-            {% do run_query(sql_statement) %}
-            {%- set sql_statement -%}
-                CREATE VIEW RAW.{{ target }}_ActiveOnly
-                AS
-                SELECT 
-                        *
-                        
-                    FROM RAW.{{ target }}
-                    WHERE [VaultEffectiveTo] IS NULL
-
-            {%- endset -%}
-            {{ print("Attempting operation ----->\n" ~ sql_statement) }}
-            {% do run_query(sql_statement) %}
-            
         {% else %}
         {# -- DATAVAULT ACTIVE -- #}
 
@@ -226,25 +207,6 @@
             {{ print("Attempting operation ----->\n" ~ sql_statement) }}
             {% do run_query(sql_statement) %}
 
-            {%- set sql_statement -%}
-                if OBJECT_ID('RAW.{{ target }}_ActiveOnly', 'V') IS NOT NULL
-                    DROP VIEW RAW.{{ target }}_ActiveOnly
-            {%- endset -%}
-            {{ print("Attempting operation ----->\n" ~ sql_statement) }}
-            {% do run_query(sql_statement) %}
-            {%- set sql_statement -%}
-                CREATE VIEW RAW.{{ target }}_ActiveOnly
-                AS
-                SELECT 
-                        *
-                        
-                    FROM RAW.{{ target }}
-                    WHERE [VaultEffectiveTo] IS NULL
-
-            {%- endset -%}
-            {{ print("Attempting operation ----->\n" ~ sql_statement) }}
-            {% do run_query(sql_statement) %}
-            
         {% else %}
         {# -- DATAVAULT ACTIVE -- #}
 
@@ -397,19 +359,6 @@
             {{ print("Attempting operation ----->\n" ~ sql_statement) }}
             {% do run_query(sql_statement) %}
 
-            {%- set sql_statement -%}
-                create or replace view raw.{{ target }}_ActiveOnly
-                as
-                select 
-                        *
-                        
-                    from raw.{{ target }}
-                    where VaultEffectiveTo is null
-
-            {%- endset -%}
-            {{ print("Attempting operation ----->\n" ~ sql_statement) }}
-            {% do run_query(sql_statement) %}
-            
         {% else %}
         {# -- DATAVAULT ACTIVE -- #}
 

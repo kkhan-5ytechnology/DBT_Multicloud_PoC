@@ -1,6 +1,6 @@
 EntityId,LinkApplicable,Calculations,DimOrFact,Process,Notes
 BudgetModels,0,0,DIM,0,
-Budgets,0,0,FACT,0,
+Budgets,0,0,FACT,1,
 BudgetKPIs,0,0,FACT,0,
 Companies,0,0,DIM,0,
 Currencies,0,0,DIM,0,
