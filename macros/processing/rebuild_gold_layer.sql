@@ -26,7 +26,7 @@
         {# -- UNION DATA FROM ALL SATS -- #}
         {%- set sql_view = namespace(ddl="") -%}
         {%- set sql_statement -%}
-            SELECT [SystemId] FROM REF.SystemDefinitions AND [Process] = 1 
+            SELECT [SystemId] FROM REF.SystemDefinitions WHERE [Process] = 1 
         {%- endset -%}
         {%- set results2 = run_query(sql_statement) -%}
         {%- for result2 in results2 -%}
@@ -99,7 +99,7 @@
         {# -- UNION DATA FROM ALL SATS -- #}
         {%- set sql_view = namespace(ddl="") -%}
         {%- set sql_statement -%}
-            SELECT [SystemId] FROM REF.SystemDefinitions AND [Process] = 1 
+            SELECT [SystemId] FROM REF.SystemDefinitions WHERE [Process] = 1 
         {%- endset -%}
         {%- set results2 = run_query(sql_statement) -%}
         {%- for result2 in results2 -%}
@@ -163,7 +163,7 @@
         {# -- UNION DATA FROM ALL SATS -- #}
         {%- set sql_view = namespace(ddl="") -%}
         {%- set sql_statement -%}
-            select SystemId from ref.SystemDefinitions AND Process = 1 
+            select SystemId from ref.SystemDefinitions WHERE Process = 1 
         {%- endset -%}
         {%- set results2 = run_query(sql_statement) -%}
         {%- for result2 in results2 -%}

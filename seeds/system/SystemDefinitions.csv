@@ -1,3 +1,4 @@
 ﻿SystemId,Description,Process,Notes
-CO001,BC Company 001,1,This company has the default mappings (override as required).
-CO002,BC Company 002,1,
+CO001,BC Company 001,1,This company has the default mappings (copy and override as required).
+CO002,BC Company 002,0,
+CO003,BC Company 003,0,
